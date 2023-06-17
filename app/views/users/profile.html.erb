@@ -43,7 +43,7 @@
                   edit
                 </button>
 
-                <a href="#">Delete</a>
+                <%= link_to "Delete", tour_path(tour), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
 
               </div>
 
@@ -125,7 +125,7 @@
 
         <div class='container'>
           <div class="create-edit-form">
-            <%# <%= render "shared/form", tour: tour %>
+            <%# <%= render "shared/form", tour: tour ????????????%>
           </div>
         </div>
 

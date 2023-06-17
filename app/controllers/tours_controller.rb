@@ -16,6 +16,12 @@ class ToursController < ApplicationController
     redirect_to profile_path
   end
 
+  def destroy
+    @tour = Tour.find(params[:id])
+    @tour.destroy
+    redirect_to profile_path, status: :see_other
+  end
+
   private
 
   def tour_params
