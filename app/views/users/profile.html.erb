@@ -31,17 +31,36 @@
           <div class="col">
             <div class="card trip-card">
 
-              <div class="card-image">
+              <div>
+                <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
+
+                  <div class="carousel-inner">
+                    <% tour.photos.each do |photo| %>
+
+
+                      <div class="carousel-item active card-image">
+                        <%= cl_image_tag photo.key, height: 150, width: 300, crop: :fill, class: 'rounded-image'%>
+                      </div>
+
+                    <% end %>
+                  </div>
+
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+
+                </div>
               </div>
 
 
               <div class="card-body my-1 py-0">
                 <h5 class='my-0'><%= tour.name %></h5>
                 <p class='my-0'>0/<%= tour.capacity %></p>
-
-                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalTwo">
-                  edit
-                </button>
 
                 <%= link_to "Delete", tour_path(tour), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
 
@@ -75,23 +94,6 @@
 
 
 
-
-
-
-  <% @user.tours.each do |tour| %>
-    <% tour.photos.each do |photo| %>
-      <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-    <% end %>
-  <% end %>
-
-
-
-
-
-<!-- Button trigger modal -->
-
-
-<!-- Modal new-->
 <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
@@ -100,32 +102,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-
         <div class='container'>
           <div class="create-edit-form">
             <%= render "shared/form", tour: @tour %>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- Modal update-->
-<div class="modal fade" id="exampleModalTwo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-
-        <div class='container'>
-          <div class="create-edit-form">
-            <%# <%= render "shared/form", tour: tour ????????????%>
           </div>
         </div>
 

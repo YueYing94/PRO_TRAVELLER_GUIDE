@@ -6,6 +6,6 @@
               <%= f.input :capacity %>
               <%= f.input :date %>
               <%= f.input :time %>
-              <%= f.input :photo, as: :file %>
+              <%= f.input :photos, as: :file, input_html: { multiple: true } %>
               <%= f.submit "Update", class: "btn btn-success" %>
             <% end %>
