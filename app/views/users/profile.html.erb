@@ -1,0 +1,114 @@
+<div class="main-div">
+  <div>
+    <div class="profile-box">
+      <%= image_tag(current_user.image, style:'height: 150px; width: 150px; border-radius: 50%; border: 2px solid #000000;') %><br>
+      <h1><%= current_user.first_name %></h1>
+    </div>
+
+    <div class="badge-box">
+      <h1>badges</h1>
+    </div>
+
+    <button class="chat-box"><h3 class="my-1">Chat with Me</h3></button>
+  </div>
+
+
+  <div>
+    <div class="card about-box">
+      <div class="card-header"><h1>About Me</h1></div>
+      <div class="card-body">
+        <p class="card-text"><%= current_user.description %></p>
+      </div>
+    </div>
+
+    <div class="card about-box">
+      <div class="card-header"><h1>Tours I Organise</h1></div>
+      <div class="card-body">
+
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <% @user.tours.each do |tour| %>
+
+          <div class="col">
+            <div class="card trip-card">
+
+              <div>
+                <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
+
+                  <div class="carousel-inner">
+                    <% tour.photos.each do |photo| %>
+
+
+                      <div class="carousel-item active card-image">
+                        <%= cl_image_tag photo.key, height: 150, width: 300, crop: :fill, class: 'rounded-image'%>
+                      </div>
+
+                    <% end %>
+                  </div>
+
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+
+                </div>
+              </div>
+
+
+              <div class="card-body my-1 py-0">
+                <h5 class='my-0'><%= tour.name %></h5>
+                <p class='my-0'>0/<%= tour.capacity %></p>
+
+                <%= link_to "Delete", tour_path(tour), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+
+              </div>
+
+
+            </div>
+          </div>
+
+        <% end %>
+        <div class="col">
+          <button type="button" class="create-card" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+            <h1 class='plus-sign'>+</h1>
+          </button>
+        </div>
+      </div>
+
+
+      </div>
+    </div>
+
+    <div class="card about-box">
+      <div class="card-header"><h1>Tours I Join</h1></div>
+      <div class="card-body">
+        <p class="card-text"><%= current_user.description %></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Create a tour</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class='container'>
+          <div class="create-edit-form">
+            <%= render "shared/form", tour: @tour %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
