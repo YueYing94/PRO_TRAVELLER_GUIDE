@@ -32,24 +32,23 @@
             <div class="card trip-card">
 
               <div>
-                <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
+                <div id="carousel_id" class="carousel slide">
 
                   <div class="carousel-inner">
-                    <% tour.photos.each do |photo| %>
+                    <% tour.photos.each_with_index do |photo, index| %>
+                      <div id="carousel_item_<%= index %>" class="card-image carousel-item <%= index == 0 ? 'active' : '' %>">
 
-
-                      <div class="carousel-item active card-image">
                         <%= cl_image_tag photo.key, height: 150, width: 300, crop: :fill, class: 'rounded-image'%>
                       </div>
 
                     <% end %>
                   </div>
 
-                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carousel_id" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                   </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
+                  <button class="carousel-control-next" type="button" data-bs-target="#carousel_id" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                   </button>
@@ -61,10 +60,17 @@
               <div class="card-body my-1 py-0">
                 <h5 class='my-0'><%= tour.name %></h5>
                 <p class='my-0'>0/<%= tour.capacity %></p>
+                <div class="col">
+                  <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                    <h1 class='plus-sign'>edit</h1>
+                  </button>
+                </div>
+
 
                 <%= link_to "Delete", tour_path(tour), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
 
               </div>
+
 
 
             </div>
@@ -93,7 +99,6 @@
 
 
 
-
 <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
@@ -105,6 +110,26 @@
         <div class='container'>
           <div class="create-edit-form">
             <%= render "shared/form", tour: @tour %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">edit a tour</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class='container'>
+          <div class="create-edit-form">
+            <%= render "shared/form", tour: tour %>
           </div>
         </div>
 
