@@ -1,5 +1,5 @@
 .navbar-lewagon {
-  justify-content: space-between;
+  /*justify-content: space-between;*/
   background: white;
 }
 
@@ -8,5 +8,32 @@
 }
 
 .navbar-lewagon .navbar-brand img {
-  width: 40px;
+  /*width: 40px;*/
+  /*position: absolute;*/
+  width: 280px;
+  height: 50px;
+  left: 114px;
+  top: 52px;
+}
+
+.form-inline{
+  display: flex;
+}
+
+.location{
+  border-top-left-radius: 20px ;
+  border-bottom-left-radius: 20px ;
+}
+
+.search{
+  content: url('https://api.iconify.design/ph/magnifying-glass.svg?color=white');
+  border-top-right-radius: 20px ;
+  border-bottom-right-radius: 20px ;
+
+}
+
+.btn-primary{
+  justify-content: flex-end;
+  background-color: #EEAC41 !important;
+  border-color:#EEAC41 !important ;
 }
