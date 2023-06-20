@@ -1,1 +1,22 @@
-<h1>this is tour index page</h1>
+
+
+<div class="p-5">
+
+  <h1>This is the tour index page</h1>
+  <div class="row">
+    <% @tours.each do |tour| %>
+      <% if tour.photos.any? %>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="card" style="width: 18rem; margin:10px">
+            <%= cl_image_tag tour.photos[0].key, height: 150, width: 300, crop: :fill, class: 'card-img-top'%>
+            <div class="card-body" style="height:200px">
+              <p class="card-text"><%= link_to tour.name.upcase, tour_path(tour) %></p>
+              <span><%= tour.description %></span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>
