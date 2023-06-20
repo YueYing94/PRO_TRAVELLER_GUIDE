@@ -10,12 +10,12 @@
             <div class="card-body" style="height:200px">
               <p><%= tour.name.upcase %></p>
               <span><%= tour.description %></span><br>
-              <button type="button" class="btn btn-primary child" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              <button type="button" class="btn btn-primary child" data-bs-toggle="modal" data-bs-target="#staticBackdrop<%= tour.id %>">
                 See More
               </button>
 
 
-              <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal fade" id="staticBackdrop<%= tour.id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -23,7 +23,7 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-
+                      <%= cl_image_tag tour.user.image.key, style:'height:50px', class: "avatar", alt: "dropdown menu" %>
 
                       <%= tour.date %>
                       <%= tour.time %>
