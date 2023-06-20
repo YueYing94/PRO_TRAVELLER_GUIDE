@@ -38,7 +38,7 @@
                     <% tour.photos.each_with_index do |photo, index| %>
                       <div id="carousel_item_<%= index %>" class="card-image carousel-item <%= index == 0 ? 'active' : '' %>">
 
-                        <%= cl_image_tag photo.key, height: 150, width: 300, crop: :fill, class: 'rounded-image'%>
+                        <%= cl_image_tag photo.key, height: 160, width: 300, crop: :fill, class: 'rounded-image'%>
                       </div>
 
                     <% end %>
@@ -60,14 +60,36 @@
               <div class="card-body my-1 py-0">
                 <h5 class='my-0'><%= tour.name %></h5>
                 <p class='my-0'>0/<%= tour.capacity %></p>
-                <div class="col">
-                  <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                    <h1 class='plus-sign'>edit</h1>
+
+                <div class="d-flex">
+
+                  <button type="button" class="edit-button" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                    <p><i class="fa-solid fa-pen-to-square"></i></p>
                   </button>
+
+                  <%= link_to tour_path(tour), class: "edit-button", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                    <i class="fa-solid fa-trash-can"></i>
+                  <% end %>
+                </div>
+                <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">edit a tour</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class='container'>
+                          <div class="create-edit-form">
+                            <%= render "shared/form", tour: tour %>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-
-                <%= link_to "Delete", tour_path(tour), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
 
               </div>
 
@@ -94,6 +116,13 @@
         <p class="card-text"><%= current_user.description %></p>
       </div>
     </div>
+
+    <div class="card about-box">
+      <div class="card-header"><h1>Tours I Saved</h1></div>
+      <div class="card-body">
+        <p class="card-text"><%= current_user.description %></p>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -110,26 +139,6 @@
         <div class='container'>
           <div class="create-edit-form">
             <%= render "shared/form", tour: @tour %>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">edit a tour</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class='container'>
-          <div class="create-edit-form">
-            <%= render "shared/form", tour: tour %>
           </div>
         </div>
 
