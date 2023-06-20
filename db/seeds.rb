@@ -35,7 +35,7 @@ max.image.attach(io: file, filename: "Max.png", content_type: "image/png")
 max.save!
 
 file = URI.open("https://images.unsplash.com/photo-1568213816046-0ee1c42bd559?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2luZSUyMHRhc3Rpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60")
-wine_tasting = Tour.new(name: "Wine-tasting", date: "30/06/2023", time: "16:00", description: "Bring your taste-buds to live with sips of vintages!", capacity: 4, duration: "45 minutes", start_point: "12, Down-by-bay Ave, Luxembourg")
+wine_tasting = Tour.new(name: "Wine-tasting", date: "30/06/2023", time: "16:00", description: "Bring your taste-buds to life with sips of vintages!", capacity: 4, duration: "45 minutes", start_point: "12, Down-by-bay Ave, Luxembourg")
 wine_tasting.photos.attach(io: file, filename: "Wine.png", content_type: "image/png")
 wine_tasting.user = maike
 wine_tasting.save!
