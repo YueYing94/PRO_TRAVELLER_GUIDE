@@ -1,17 +1,70 @@
 
 
 <div class="p-5">
-
-  <h1>This is the tour index page</h1>
   <div class="row">
     <% @tours.each do |tour| %>
       <% if tour.photos.any? %>
         <div class="col-lg-3 col-md-6 col-sm-6">
-          <div class="card" style="width: 18rem; margin:10px">
+          <div class="card parent" style="width: 18rem; margin:10px">
             <%= cl_image_tag tour.photos[0].key, height: 150, width: 300, crop: :fill, class: 'card-img-top'%>
             <div class="card-body" style="height:200px">
-              <p class="card-text"><%= link_to tour.name.upcase, tour_path(tour) %></p>
-              <span><%= tour.description %></span>
+              <p><%= tour.name.upcase %></p>
+              <span><%= tour.description %></span><br>
+              <button type="button" class="btn btn-primary child" data-bs-toggle="modal" data-bs-target="#staticBackdrop<%= tour.id %>">
+                See More
+              </button>
+
+
+              <div class="modal fade" id="staticBackdrop<%= tour.id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="staticBackdropLabel"><%= tour.name %></h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+
+                      <div class='my-3'>
+                        <div id="carousel_id" class="carousel slide">
+
+                          <div class="carousel-inner">
+                            <% tour.photos.each_with_index do |photo, index| %>
+                              <div id="carousel_item_<%= index %>" class="card-image carousel-item <%= index == 0 ? 'active' : '' %>">
+
+                                <%= cl_image_tag photo.key, height: 160, width: 300, crop: :fill, class: 'rounded-image'%>
+                              </div>
+
+                            <% end %>
+                          </div>
+
+                          <button class="carousel-control-prev" type="button" data-bs-target="#carousel_id" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                          </button>
+                          <button class="carousel-control-next" type="button" data-bs-target="#carousel_id" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                          </button>
+
+                        </div>
+                      </div>
+
+                      <p><strong>Date:</strong><%= tour.date %></p><br>
+                      <p><strong>Time:</strong><%= tour.time.strftime("%H:%M") %></p><br>
+                      <p><strong>Start point:</strong><%= tour.start_point %></p><br>
+                      <p><strong>Capacity:</strong><%= tour.capacity %></p><br>
+                      <p><strong>Description:</strong><%= tour.description %></p><br>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-between">
+                      <div class="d-flex align-items-center"><%= cl_image_tag tour.user.image.key, style: 'height: 50px; width: 50px;', class: "avatar"%><p class="my-0 mx-2"> Chat With Me</p><br></div>
+                      <button type="button" class="btn btn-primary">Book</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
             </div>
           </div>
         </div>
