@@ -1,6 +1,11 @@
 class ToursController < ApplicationController
   def index
     @tours = Tour.all
+    if params[:query].present?
+      @tours = Tour.nameofmethod(params[:query])
+      @search_query = params[:query]
+      @result_count = @tours.count
+    end
   end
 
   def create
@@ -21,6 +26,12 @@ class ToursController < ApplicationController
     @tour.destroy
     redirect_to profile_path, status: :see_other
   end
+
+  # def search
+  #   @tours = Tour.where(start_point: tour_params[:query])
+  #   @search_query = params[:query]
+  #   @result_count = @tours.count
+  # end
 
   private
 

@@ -4,14 +4,26 @@
       <%= image_tag "https://s3-alpha-sig.figma.com/img/da81/93dc/d81af1dc8a0ac2958b14c5a9ce9b69b3?Expires=1687737600&Signature=MbaqirH9gGTVwGv53j6vIn~makQk1~OcjmGyxVd8AS6lHXzlqBMwd4cH3OQSz0yS8l3CLcaVN1NwfM5~Tv18eiBV5pOPTPKQ8sXij3nStp0ic15BfBdx4-W5ET7cqI6W1YfMxi95fdmJ-6FW2PLglOtKXNzWeONvB3qmqVOAmVyuXqproAEJhPiglMJEXMxJBxWUP9tDT1Rxxt8PjQvxmT7tc4WJGEKDbH~v17K1vvPmcc4UXEMIJ2HaNh0GBlzfkHhW~xEjzSTevWCDjlohNwWpNX2XnWXWp1eFQPelwpeuFDAN~F9mkwoo-jufmK3dRft0IlxvFm0twKhNOkjLtA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4" %>
     <% end %>
 
-    <!--<div class="navbar navbar-light bg-light">-->
-      <form class="form-inline">
+
+      <div class="form-inline">
+        <%= form_with url: tours_path, method: :get do |form| %>
+          <div class="form-control location mr-sm-2">
+            <%= form.text_field :query, placeholder: "Search by countries", class: "form-control location mr-sm-2" %>
+            <!--<%= form.date_field :query, placeholder: "Date", class: "form-control mr-sm-2"%><-->
+            <%= form.submit "Search", class: "btn btn-primary search my-2 my-sm-0" %><iconify-icon icon="ph:magnifying-glass" width="20" height="20" style="color: white;"></iconify-icon><script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+          </div>
+        <% end %>
+      </div>
+
+
+    <!--<div class="navbar navbar-light bg-light">
+    <form class="form-inline">
         <input class="form-control location mr-sm-2" type="search" placeholder="Location" aria-label="Search">
         <input class="form-control mr-sm-2" type="search" placeholder="Date" aria-label="Search">
         <button class="btn btn-primary search my-2 my-sm-0" type="submit"><iconify-icon icon="ph:magnifying-glass" width="20" height="20" style="color: white;"></iconify-icon><script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script></button>
-      </form>
+      </form><-->
 
-              <!-- https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png-->
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
