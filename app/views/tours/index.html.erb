@@ -60,6 +60,9 @@
                     <div class="modal-footer d-flex justify-content-between">
 
 
+
+
+
                     <%= link_to user_path(tour.user), target: "_blank", class: "edit-button text-warning" do %>
                       <div class="d-flex align-items-center">
                         <%= cl_image_tag tour.user.image.key, style: 'height: 50px; width: 50px;', class: "avatar" %>
@@ -68,8 +71,10 @@
                       </div>
                     <% end %>
 
+                      <%= simple_form_for [tour, @booking] do |f| %>
+                      <%= f.button :submit %>
+                      <% end %>
 
-                      <button type="button" class="btn btn-primary">Book</button>
                     </div>
                   </div>
                 </div>

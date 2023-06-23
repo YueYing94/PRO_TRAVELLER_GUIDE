@@ -1,6 +1,7 @@
 class ToursController < ApplicationController
   def index
     @tours = Tour.all
+    @booking = Booking.new
   end
 
   def create
@@ -20,6 +21,9 @@ class ToursController < ApplicationController
     @tour = Tour.find(params[:id])
     @tour.destroy
     redirect_to profile_path, status: :see_other
+  end
+
+  def show
   end
 
   private
