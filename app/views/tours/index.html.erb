@@ -62,7 +62,6 @@
 
 
 
-
                     <%= link_to user_path(tour.user), target: "_blank", class: "edit-button text-warning" do %>
                       <div class="d-flex align-items-center">
                         <%= cl_image_tag tour.user.image.key, style: 'height: 50px; width: 50px;', class: "avatar" %>
@@ -71,9 +70,11 @@
                       </div>
                     <% end %>
 
-                      <%= simple_form_for [tour, @booking] do |f| %>
-                      <%= f.submit "Book now!", class:"btn btn-primary child" %>
-                      <% end %>
+
+
+                    <%= simple_form_for [tour, @booking] do |f| %>
+                    <%= f.submit "Book now!", class:"btn btn-primary child" %>
+                    <% end %>
 
                     </div>
                   </div>
