@@ -4,8 +4,10 @@ class Tour < ApplicationRecord
   has_many_attached :photos
 
   include PgSearch::Model
-  pg_search_scope :search_by_start_point, against: [ :start_point ], using:
+  pg_search_scope :search_by_start_point, against: :start_point
+  pg_search_scope :search_by_date, against: :date
   {
     tsearch: { prefix: true } # <-- now `superman batm` will return something!
   }
+
 end

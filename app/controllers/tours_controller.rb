@@ -1,12 +1,12 @@
 class ToursController < ApplicationController
+
   def index
     @tours = Tour.all
-    if params[:query].present?
-      @tours = Tour.search_by_start_point_and_date(params[:query])
-      @search_query = params[:query]
-      @result_count = @tours.count
-    else
-
+    if params[:location_query].present?
+      @tours = @tours.where("start_point ILIKE ?", "%#{params[:location_query]}%")
+    end
+    if params[:date_query].present?
+      @tours = @tours.where(date: params[:date_query])
     end
   end
 
@@ -28,12 +28,6 @@ class ToursController < ApplicationController
     @tour.destroy
     redirect_to profile_path, status: :see_other
   end
-
-  # def search
-  #   @tours = Tour.where(start_point: tour_params[:query])
-  #   @search_query = params[:query]
-  #   @result_count = @tours.count
-  # end
 
   private
 
