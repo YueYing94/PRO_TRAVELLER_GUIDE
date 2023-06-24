@@ -1,23 +1,26 @@
 class ToursController < ApplicationController
   def index
-    @tours = Tour.all
+    @tours = policy_scope(Tour)
   end
 
   def create
     @tour = Tour.new(tour_params)
     @tour.user = current_user
+    authorize @tour
     @tour.save
     redirect_to profile_path
   end
 
   def update
     @tour = Tour.find(params[:id])
+    authorize @tour
     @tour.update(tour_params)
     redirect_to profile_path
   end
 
   def destroy
     @tour = Tour.find(params[:id])
+    authorize @tour
     @tour.destroy
     redirect_to profile_path, status: :see_other
   end
