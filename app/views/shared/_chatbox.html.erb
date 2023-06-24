@@ -1,0 +1,141 @@
+<button class="btn btn-primary fixed-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><h4 class="mb-0"><i class="fa-regular fa-comments"></i></h4></button>
+
+<div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title my-0" id="offcanvasRightLabel">My Chats</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+
+    <% chatrooms.each do |chatroom| %>
+
+
+      <% if current_user == chatroom.receiver %>
+
+      <button type="button" class="d-flex chat-card" data-bs-toggle="modal" data-bs-target="#staticBackdrop<%= chatroom.id %>">
+        <div class="d-flex" >
+          <%= image_tag(chatroom.asker.image, style:'height: 50px; width: 50px; border-radius: 50%; border: 2px solid #000000;') %>
+          <div class="d-flex align-items-start flex-column">
+            <p class='my-0'><strong>With <%= chatroom.asker.first_name %></strong></p>
+            <% if !chatroom.messages.empty? %>
+              <p class='my-0'><%= chatroom.messages.last.user.first_name %>: <%= chatroom.messages.last.content %></p>
+            <% else %>
+              <p class='my-0'>No message yet</p>
+            <% end %>
+          </div>
+        </div>
+      </button>
+
+
+
+      <div class="modal fade" id="staticBackdrop<%= chatroom.id %>" data-bs-backdrop="false" data-bs-scroll="true" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <%= image_tag(chatroom.asker.image, style:'height: 50px; width: 50px; border-radius: 50%; border: 2px solid #000000;') %><h5 class="mx-2 my-0"><%= chatroom.asker.first_name %></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+
+
+              <div class="container chatroom" data-controller="chatroom-subscription"  data-chatroom-subscription-id-value="<%= chatroom.id %>">
+                <div data-chatroom-subscription-target="messages">
+                  <% chatroom.messages.each do |message| %>
+                    <div id="message-<%= message.id %>">
+                      <small>
+                        <strong><%= message.user.first_name %></strong>
+                        <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+                      </small>
+                      <p><%= message.content %></p>
+                    </div>
+                  <% end %>
+                </div>
+
+                <%= simple_form_for [chatroom, message],
+                  html: {class: "d-flex"} do |f|
+                %>
+                  <%= f.input :content,
+                    label: false,
+                    placeholder: "Message ##{chatroom.name}",
+                    wrapper_html: {class: "flex-grow-1"}
+                  %>
+                  <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+                <% end %>
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <% else %>
+
+      <button type="button" class="d-flex chat-card" data-bs-toggle="modal" data-bs-target="#staticBackdrop<%= chatroom.id %>">
+        <div class="d-flex">
+          <%= image_tag(chatroom.receiver.image, style:'height: 50px; width: 50px; border-radius: 50%; border: 2px solid #000000;', class: 'mr-20') %>
+          <div class="d-flex align-items-start flex-column">
+            <p class='my-0'><strong>With <%= chatroom.receiver.first_name %></strong></p>
+            <% if !chatroom.messages.empty? %>
+              <p class='my-0'><%= chatroom.messages.last.user.first_name %>: <%= chatroom.messages.last.content %></p>
+            <% else %>
+              <p class='my-0'>No message yet</p>
+            <% end %>
+          </div>
+        </div>
+      </button>
+
+      <div class="modal fade" id="staticBackdrop<%= chatroom.id %>" data-bs-backdrop="false" data-bs-scroll="true" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <%= image_tag(chatroom.receiver.image, style:'height: 50px; width: 50px; border-radius: 50%; border: 2px solid #000000;') %><h5 class="mx-2 my-0"><%= chatroom.receiver.first_name %></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+
+
+              <div class="container chatroom" data-controller="chatroom-subscription"  data-chatroom-subscription-id-value="<%= chatroom.id %>">
+                <div data-chatroom-subscription-target="messages">
+                  <% chatroom.messages.each do |message| %>
+                    <div id="message-<%= message.id %>">
+                      <small>
+                        <strong><%= message.user.first_name %></strong>
+                        <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+                      </small>
+                      <p><%= message.content %></p>
+                    </div>
+                  <% end %>
+                </div>
+
+                <%= simple_form_for [chatroom, message],
+                  html: {class: "d-flex"} do |f|
+                %>
+                  <%= f.input :content,
+                    label: false,
+                    placeholder: "Message ##{chatroom.name}",
+                    wrapper_html: {class: "flex-grow-1"}
+                  %>
+                  <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+                <% end %>
+              </div>
+
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <% end %>
+
+    <% end %>
+
+  </div>
+</div>
