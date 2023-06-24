@@ -5,13 +5,12 @@
     <% end %>
 
 
-      <div class="form-inline">
-        <%= form_with url: tours_path, method: :get do |form| %>
-          <div class="form-control location mr-sm-2">
-            <%= form.text_field :query, placeholder: "Search by countries", class: "form-control location mr-sm-2" %>
-            <!--<%= form.date_field :query, placeholder: "Date", class: "form-control mr-sm-2"%><-->
-            <%= form.submit "Search", class: "btn btn-primary search my-2 my-sm-0" %><iconify-icon icon="ph:magnifying-glass" width="20" height="20" style="color: white;"></iconify-icon><script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-          </div>
+      <div>
+        <%= form_with url: tours_path, method: :get, class: "form-inline" do %>
+
+            <%= text_field_tag :location_query,  params[:location_query], placeholder: "Search by location", class: "form-control location mr-sm-2" %>
+            <%= date_field_tag :date_query,  params[:date_query], placeholder: "Date", class: "form-control mr-sm-2"%>
+            <%= submit_tag "Search", class: "btn btn-primary search my-2 my-sm-0" %><iconify-icon icon="ph:magnifying-glass" width="20" height="20" style="color: white;"></iconify-icon><script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
         <% end %>
       </div>
 

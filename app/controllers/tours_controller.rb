@@ -2,9 +2,11 @@ class ToursController < ApplicationController
   def index
     @tours = Tour.all
     if params[:query].present?
-      @tours = Tour.nameofmethod(params[:query])
+      @tours = Tour.search_by_start_point_and_date(params[:query])
       @search_query = params[:query]
       @result_count = @tours.count
+    else
+
     end
   end
 
