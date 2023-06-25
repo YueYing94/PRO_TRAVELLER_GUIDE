@@ -70,11 +70,14 @@
                       </div>
                     <% end %>
 
-
-
-                    <%= simple_form_for [tour, @booking] do |f| %>
-                    <%= f.submit "Book now!", class:"btn btn-primary child" %>
+                    <% if tour.user != current_user %>
+                      <%= simple_form_for [tour, @booking] do |f| %>
+                      <%= f.submit "Book now!", class:"btn btn-primary child" %>
+                      <% end %>
+                    <% else %>
+                      <p>you've booked this tour!</p>
                     <% end %>
+
 
                     </div>
                   </div>
