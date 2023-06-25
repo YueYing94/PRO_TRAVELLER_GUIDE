@@ -7,9 +7,16 @@ export default class extends Controller {
   static values = { id: Number };
 
   connect() {
-    createConsumer().subscriptions.create({
-      channel: "ChatroomChannel",
-      chatroomId: this.idValue,
-    });
+    createConsumer().subscriptions.create(
+      {
+        channel: "ChatroomChannel",
+        id: this.idValue,
+      },
+      {
+        received: (data) => {
+          this.messagesTarget.insertAdjacentHTML("beforeend", data);
+        },
+      }
+    );
   }
 }

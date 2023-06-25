@@ -18,7 +18,7 @@
           <div class="d-flex align-items-start flex-column">
             <p class='my-0'><strong>With <%= chatroom.asker.first_name %></strong></p>
             <% if !chatroom.messages.empty? %>
-              <p class='my-0'><%= chatroom.messages.last.user.first_name %>: <%= chatroom.messages.last.content %></p>
+              <p class='my-0'><strong><%= chatroom.messages.last.user.first_name %>: <%= chatroom.messages.last.content %></strong> <i><%= chatroom.messages.last.created_at.strftime("%b %e at %l:%M %p") %></i></p>
             <% else %>
               <p class='my-0'>No message yet</p>
             <% end %>
@@ -42,13 +42,7 @@
               <div class="container chatroom" data-controller="chatroom-subscription"  data-chatroom-subscription-id-value="<%= chatroom.id %>">
                 <div data-chatroom-subscription-target="messages">
                   <% chatroom.messages.each do |message| %>
-                    <div id="message-<%= message.id %>">
-                      <small>
-                        <strong><%= message.user.first_name %></strong>
-                        <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
-                      </small>
-                      <p><%= message.content %></p>
-                    </div>
+                    <%= render 'messages/message', message: message %>
                   <% end %>
                 </div>
 
@@ -80,7 +74,7 @@
           <div class="d-flex align-items-start flex-column">
             <p class='my-0'><strong>With <%= chatroom.receiver.first_name %></strong></p>
             <% if !chatroom.messages.empty? %>
-              <p class='my-0'><%= chatroom.messages.last.user.first_name %>: <%= chatroom.messages.last.content %></p>
+              <p class='my-0'><strong><%= chatroom.messages.last.user.first_name %>: <%= chatroom.messages.last.content %></strong> <i><%= chatroom.messages.last.created_at.strftime("%b %e at %l:%M %p") %></i></p>
             <% else %>
               <p class='my-0'>No message yet</p>
             <% end %>
@@ -102,13 +96,7 @@
               <div class="container chatroom" data-controller="chatroom-subscription"  data-chatroom-subscription-id-value="<%= chatroom.id %>">
                 <div data-chatroom-subscription-target="messages">
                   <% chatroom.messages.each do |message| %>
-                    <div id="message-<%= message.id %>">
-                      <small>
-                        <strong><%= message.user.first_name %></strong>
-                        <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
-                      </small>
-                      <p><%= message.content %></p>
-                    </div>
+                    <%= render 'messages/message', message: message %>
                   <% end %>
                 </div>
 
