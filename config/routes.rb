@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   get '/profile', to: "users#profile"
   resources :tours
   root to: "pages#home"
-  get "/tours", to: "tours#index"
+  get '/explorers/:id', to: "users#show", as: :user
 end
