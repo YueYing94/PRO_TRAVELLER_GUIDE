@@ -8,5 +8,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @booking = Booking.new
+    @bookings = Booking.all
   end
 end
