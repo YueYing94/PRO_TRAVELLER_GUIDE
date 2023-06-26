@@ -70,7 +70,7 @@
                       </div>
                     <% end %>
 
-                    <% if tour.user != current_user %>
+                    <% if tour.user != current_user && tour.bookings.pluck(:user_id).include?(current_user.id) == false %>
                       <%= simple_form_for [tour, @booking] do |f| %>
                       <%= f.submit "Book now!", class:"btn btn-primary child" %>
                       <% end %>
