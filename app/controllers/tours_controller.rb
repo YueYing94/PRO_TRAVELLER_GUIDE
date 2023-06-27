@@ -1,6 +1,13 @@
 class ToursController < ApplicationController
   def index
     @tours = policy_scope(Tour)
+    @markers = @tours.geocoded.map do |tour|
+      {
+        lat: tour.latitude,
+        lng: tour.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: { tour: tour })
+      }
+    end
   end
 
   def create

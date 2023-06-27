@@ -51,11 +51,16 @@
                       </div>
 
 
-                      <p><strong>Date:</strong><%= tour.date %></p><br>
-                      <p><strong>Time:</strong><%= tour.time.strftime("%H:%M") %></p><br>
-                      <p><strong>Start point:</strong><%= tour.start_point %></p><br>
-                      <p><strong>Capacity:</strong><%= tour.capacity %></p><br>
-                      <p><strong>Description:</strong><%= tour.description %></p><br>
+                      <p><strong>Date: </strong><%= tour.date %></p><br>
+                      <p><strong>Time: </strong><%= tour.time.strftime("%H:%M") %></p><br>
+                      <p><strong>Capacity: </strong><%= tour.capacity %></p><br>
+                      <p><strong>Description: </strong><%= tour.description %></p><br>
+                      <p><strong>Start point: </strong><%= tour.start_point %></p><br>
+                      <div style="width: 100%; height: 300px;"
+                        data-controller="map"
+                        data-map-markers-value="<%= @markers.to_json %>"
+                        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+                      </div>
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
 
