@@ -1,6 +1,13 @@
 class ToursController < ApplicationController
+
   def index
     @tours = policy_scope(Tour)
+    if params[:location_query].present?
+      @tours = @tours.where("start_point ILIKE ?", "%#{params[:location_query]}%")
+    end
+    if params[:date_query].present?
+      @tours = @tours.where(date: params[:date_query])
+    end
   end
 
   def create
