@@ -4,7 +4,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static values = {
     apiKey: String,
-    markers: Array
+    markers: Object
   };
   static targets = ["map", "container"];
 
@@ -12,30 +12,38 @@ export default class extends Controller {
     mapboxgl.accessToken = this.apiKeyValue
 
     this.map = new mapboxgl.Map({
-      container: this.element,
+      container: this.containerTarget,
       style: "mapbox://styles/mapbox/streets-v10"
-    })
-    this.#addMarkersToMap()
-    this.#fitMapToMarkers()
-    this.map.resize();
+    });
+
+    this.map.on('load', function () {
+      this.map.resize();
+    });
+
+    this.#addMarkersToMap();
+    this.#fitMapToMarkers();
+
   }
 
   #addMarkersToMap() {
-    this.markersValue.forEach((marker) => {
-      const popup = new mapboxgl.Popup().setHTML(marker.info_window_html);
+      const popup = new mapboxgl.Popup().setHTML(this.markersValue.info_window_html);
       const markerColor = document.createElement("div");
       markerColor.innerHTML =
-        "<i class='fa-sharp fa-solid fa-location-dot fa-2xl' style='color: #28a745;'></i>";
-      new mapboxgl.Marker()
-        .setLngLat([ marker.lng, marker.lat ])
+        "<i class='fa-sharp fa-solid fa-location-dot fa-2xl' style='color: #76ac71;'></i>";
+      new mapboxgl.Marker(markerColor)
+        .setLngLat([ this.markersValue.lng, this.markersValue.lat ])
         .setPopup(popup)
-        .addTo(this.map)
-    })
+        .addTo(this.map);
   }
 
   #fitMapToMarkers() {
     const bounds = new mapboxgl.LngLatBounds()
     this.markersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]))
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 })
+  }
+
+  resizeMap(event) {
+    console.log("Hi");
+    this.map.resize();
   }
 }

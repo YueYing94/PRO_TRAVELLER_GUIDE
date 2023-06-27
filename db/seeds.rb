@@ -35,31 +35,31 @@ max.image.attach(io: file, filename: "Max.png", content_type: "image/png")
 max.save!
 
 file = URI.open("https://images.unsplash.com/photo-1568213816046-0ee1c42bd559?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2luZSUyMHRhc3Rpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60")
-wine_tasting = Tour.new(name: "Wine-tasting", date: "30/06/2023", time: "16:00", description: "Bring your taste-buds to life with sips of vintages!", capacity: 4, duration: "45 minutes", start_point: "12, Down-by-bay Ave, Luxembourg")
+wine_tasting = Tour.new(name: "Wine-tasting", date: "30/06/2023", time: "16:00", description: "Bring your taste-buds to life with sips of vintages!", capacity: 4, duration: "45 minutes", start_point: "120 Av. Lucien Salentiny, 9080 Ettelbruck, Luxembourg")
 wine_tasting.photos.attach(io: file, filename: "Wine.png", content_type: "image/png")
 wine_tasting.user = maike
 wine_tasting.save!
 
 file = URI.open("https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aGlraW5nfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60")
-hiking = Tour.new(name: "Hiking", date: "28/06/2023", time: "11:00", description: "Come explore and take in breathtaking views, come be one with nature! Come along with your hiking boots, water bottle and hat.", capacity: 4, duration: "120 minutes", start_point: "Peak District Valley, Rotterdam")
+hiking = Tour.new(name: "Hiking", date: "28/06/2023", time: "11:00", description: "Come explore and take in breathtaking views, come be one with nature! Come along with your hiking boots, water bottle and hat.", capacity: 4, duration: "120 minutes", start_point: "226, Delftweg, Overschie, Rotterdam")
 hiking.photos.attach(io: file, filename: "Hiking.png", content_type: "image/png")
 hiking.user = yue
 hiking.save!
 
 file = URI.open("https://images.unsplash.com/photo-1516633630673-67bbad747022?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHN1cmZpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60")
-surfing = Tour.new(name: "Surfing", date: "28/06/2023", time: "10:00", description: "Massive, big or small waves, ride on!", capacity: 4, duration: "60 minutes", start_point: "Endless shoreline beach, Zürich")
+surfing = Tour.new(name: "Surfing", date: "28/06/2023", time: "10:00", description: "Massive, big or small waves, ride on!", capacity: 4, duration: "60 minutes", start_point: "Bellariarain 8038 Zürich")
 surfing.photos.attach(io: file, filename: "Surfing.png", content_type: "image/png")
 surfing.user = jose
 surfing.save!
 
 file = URI.open("https://images.unsplash.com/photo-1415125721330-116ba2f81152?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2lnaHRzZWVpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60")
-sight_seeing = Tour.new(name: "Sight-seeing", date: "28/06/2023", time: "13:00", description: "Lets explore my city-centre together, let's visit my city's historic places.", capacity: 5, duration: "120 minutes", start_point: "Starbucks city-centre, Holm")
+sight_seeing = Tour.new(name: "Sight-seeing", date: "28/06/2023", time: "13:00", description: "Lets explore my city-centre together, let's visit my city's historic places.", capacity: 5, duration: "120 minutes", start_point: "Hauptstr. 14, 25488 Holm, Schleswig-Holstein Germany")
 sight_seeing.photos.attach(io: file, filename: "Sighseeing.png", content_type: "image/png")
 sight_seeing.user = tolu
 sight_seeing.save!
 
 file = URI.open("https://images.unsplash.com/photo-1502126324834-38f8e02d7160?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bW91bnRhaW4lMjBjbGltYmluZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60")
-mountain_climbing = Tour.new(name: "Mountain-climbing", date: "01/07/2023", time: "10:00", description: "Are you a sucker for the best views in the world? Get atop a mountain! Come-on, what are you waitng for?", capacity: 5, duration: "120 minutes", start_point: "The Rocky Hillies, right before the snake bend, Denmark")
+mountain_climbing = Tour.new(name: "Mountain-climbing", date: "01/07/2023", time: "10:00", description: "Are you a sucker for the best views in the world? Get atop a mountain! Come-on, what are you waitng for?", capacity: 5, duration: "120 minutes", start_point: "Nordmarksvej 8, 7190 Billund, Denmark")
 mountain_climbing.photos.attach(io: file, filename: "Mountainclimb.png", content_type: "image/png")
 mountain_climbing.user = max
 mountain_climbing.save!
