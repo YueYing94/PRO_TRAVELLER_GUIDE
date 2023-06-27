@@ -197,10 +197,10 @@
                         <p>THIS IS YOUR TOUR</p>
                       <% elsif booking.user.id == current_user.id  %>
                         <p>BOOKED!</p>
-                      <% elsif @bookings.pluck(:user_id).include?(current_user.id) == true  %>
+                      <% elsif booking.tour.bookings.pluck(:user_id).include?(current_user.id) == true  %>
                         <p>BOOKED!</p>
                       <% elsif booking.tour.bookings.count < booking.tour.capacity %>
-                        <%= simple_form_for [tour, @booking] do |f| %>
+                        <%= simple_form_for [booking.tour, @booking] do |f| %>
                         <%= f.submit "Book now!", class:"btn btn-primary child" %>
                        <% end %>
                       <% else %>
