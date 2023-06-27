@@ -1,4 +1,5 @@
 class ToursController < ApplicationController
+
   def index
     @tours = policy_scope(Tour)
     @markers = @tours.geocoded.map do |tour|
@@ -7,6 +8,11 @@ class ToursController < ApplicationController
         lng: tour.longitude,
         info_window_html: render_to_string(partial: "info_window", locals: { tour: tour })
       }
+    if params[:location_query].present?
+      @tours = @tours.where("start_point ILIKE ?", "%#{params[:location_query]}%")
+    end
+    if params[:date_query].present?
+      @tours = @tours.where(date: params[:date_query])
     end
   end
 

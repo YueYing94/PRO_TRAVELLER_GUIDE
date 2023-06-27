@@ -5,4 +5,12 @@ class Tour < ApplicationRecord
   has_many_attached :photos
   geocoded_by :start_point
   after_validation :geocode, if: :will_save_change_to_start_point?
+
+  include PgSearch::Model
+  pg_search_scope :search_by_start_point, against: :start_point
+  pg_search_scope :search_by_date, against: :date
+  {
+    tsearch: { prefix: true } # <-- now `superman batm` will return something!
+  }
+
 end

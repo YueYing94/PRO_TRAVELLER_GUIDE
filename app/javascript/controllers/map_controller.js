@@ -5,7 +5,9 @@ export default class extends Controller {
   static values = {
     apiKey: String,
     markers: Array
-  }
+  };
+  static targets = ["map", "container"];
+
   connect() {
     mapboxgl.accessToken = this.apiKeyValue
 
@@ -20,7 +22,10 @@ export default class extends Controller {
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
+      const popup = new mapboxgl.Popup().setHTML(marker.info_window_html);
+      const markerColor = document.createElement("div");
+      markerColor.innerHTML =
+        "<i class='fa-sharp fa-solid fa-location-dot fa-2xl' style='color: #28a745;'></i>";
       new mapboxgl.Marker()
         .setLngLat([ marker.lng, marker.lat ])
         .setPopup(popup)
