@@ -81,9 +81,19 @@
                     <div class="modal-footer d-flex justify-content-between">
 
 
-                      <%= simple_form_for [tour, @booking] do |f| %>
-                      <%= f.submit "Book now!", class:"btn btn-primary child" %>
+                      <% if tour.user.id == current_user.id %>
+                        <p>THIS IS YOUR TOUR</p>
+                      <% elsif tour.bookings.pluck(:user_id).include?(current_user.id) == true  %>
+                        <p>BOOKED!</p>
+                      <% elsif tour.bookings.count < tour.capacity %>
+                        <%= simple_form_for [tour, @booking] do |f| %>
+                        <%= f.submit "Book now!", class:"btn btn-primary child" %>
+                       <% end %>
+                      <% else %>
+                        <p>this tour is full!</p>
                       <% end %>
+
+
                     </div>
                   </div>
                 </div>
@@ -189,10 +199,12 @@
                         <p>BOOKED!</p>
                       <% elsif @bookings.pluck(:user_id).include?(current_user.id) == true  %>
                         <p>BOOKED!</p>
-                      <% else %>
-                        <%= simple_form_for [booking.tour, @booking] do |f| %>
+                      <% elsif booking.tour.bookings.count < booking.tour.capacity %>
+                        <%= simple_form_for [tour, @booking] do |f| %>
                         <%= f.submit "Book now!", class:"btn btn-primary child" %>
-                        <% end %>
+                       <% end %>
+                      <% else %>
+                        <p>this tour is full!</p>
                       <% end %>
 
 
