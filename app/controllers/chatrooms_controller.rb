@@ -11,7 +11,6 @@ class ChatroomsController < ApplicationController
       redirect_to chatroom_path(exist_chatroom)
     else
       @chatroom.save
-      redirect_to chatroom_path(@chatroom)
     end
     authorize @chatroom
   end
