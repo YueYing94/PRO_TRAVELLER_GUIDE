@@ -32,3 +32,10 @@
 .chat{
   content: url('https://api.iconify.design/fluent/chat-32-regular.svg');
 }
+
+
+.card bookmark-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}

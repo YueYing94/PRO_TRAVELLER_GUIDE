@@ -2,7 +2,7 @@
   <div>
     <div class="profile-box">
       <%= image_tag(current_user.image, style:'height: 150px; width: 150px; border-radius: 50%; border: 2px solid #000000;') %><br>
-      <h1><%= current_user.first_name %></h1>
+      <h1><%= current_user.first_name.capitalize + " " + current_user.last_name.capitalize %></h1>
     </div>
 
     <div class="badge-box">
@@ -117,15 +117,6 @@
       </div>
     </div>
 
-    <div class="card about-box">
-      <div class="card-header"><h1>Tours I Saved</h1></div>
-      <div class="card-body">
-        <p class="card-text"><%= current_user.description %></p>
-      </div>
-    </div>
-  </div>
-</div>
-
 
 
 <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -143,5 +134,28 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="card about-box">
+  <div class="card-header">
+    <h1>For Later</h1>
+  </div>
+  <div class="card-body">
+    <% if @bookmarked_tours.present? %>
+      <ul>
+        <% @bookmarked_tours.each do |tour| %>
+         <div class = bookmarked>
+         <li  style="padding: 7px;">
+           <%= link_to tour.name, tours_path(tour), style: 'color: #000000; font-weight: bold; text-decoration: none;' %>
+            - <%= cl_image_tag tour.user.image.key, style: 'height: 40px; width: 40px;', class: 'avatar' %>
+          </li>
+
+         </div>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No bookmarked tours.</p>
+    <% end %>
   </div>
 </div>
