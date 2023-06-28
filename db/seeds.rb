@@ -6,11 +6,12 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 require "open-uri"
+Booking.destroy_all
 Message.destroy_all
 Chatroom.destroy_all
 Tour.destroy_all
 User.destroy_all
-Booking.destroy_all
+
 
 
 file = URI.open("https://images.unsplash.com/photo-1607770421266-f7a08a856359?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTkxfHx3b21lbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60")
