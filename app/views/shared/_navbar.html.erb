@@ -1,6 +1,6 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container">
-    <%= link_to "#", class: "navbar-brand" do %>
+    <%= link_to root_path, class: "navbar-brand" do %>
       <%= image_tag "https://s3-alpha-sig.figma.com/img/da81/93dc/d81af1dc8a0ac2958b14c5a9ce9b69b3?Expires=1687737600&Signature=MbaqirH9gGTVwGv53j6vIn~makQk1~OcjmGyxVd8AS6lHXzlqBMwd4cH3OQSz0yS8l3CLcaVN1NwfM5~Tv18eiBV5pOPTPKQ8sXij3nStp0ic15BfBdx4-W5ET7cqI6W1YfMxi95fdmJ-6FW2PLglOtKXNzWeONvB3qmqVOAmVyuXqproAEJhPiglMJEXMxJBxWUP9tDT1Rxxt8PjQvxmT7tc4WJGEKDbH~v17K1vvPmcc4UXEMIJ2HaNh0GBlzfkHhW~xEjzSTevWCDjlohNwWpNX2XnWXWp1eFQPelwpeuFDAN~F9mkwoo-jufmK3dRft0IlxvFm0twKhNOkjLtA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4" %>
     <% end %>
 
@@ -13,14 +13,9 @@
             <%= submit_tag "Search", class: "btn btn-primary search my-2 my-sm-0" %><iconify-icon icon="ph:magnifying-glass" width="20" height="20" style="color: white;"></iconify-icon><script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
         <% end %>
       </div>
-
-
-    <!--<div class="navbar navbar-light bg-light">
-    <form class="form-inline">
-        <input class="form-control location mr-sm-2" type="search" placeholder="Location" aria-label="Search">
-        <input class="form-control mr-sm-2" type="search" placeholder="Date" aria-label="Search">
-        <button class="btn btn-primary search my-2 my-sm-0" type="submit"><iconify-icon icon="ph:magnifying-glass" width="20" height="20" style="color: white;"></iconify-icon><script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script></button>
-      </form><-->
+      <div>
+        <%= link_to "See all tours", tours_path, class: "btn btn-primary" %>
+      </div>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,9 +25,6 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
-          </li>
           <li class="nav-item">
             <%= link_to "Messages", "#", class: "nav-link" %>
           </li>

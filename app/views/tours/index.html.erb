@@ -1,5 +1,3 @@
-
-
 <div class="p-5">
   <div class="row">
     <% @tours.each do |tour| %>
@@ -10,9 +8,13 @@
             <div class="card-body" style="height:200px">
               <p><%= tour.name.upcase %></p>
               <span><%= tour.description %></span><br>
-              <button type="button" class="btn btn-primary child" data-bs-toggle="modal" data-bs-target="#staticBackdrop<%= tour.id %>">
+              <% if user_signed_in? %>
+                <button type="button" class="btn btn-primary child" data-bs-toggle="modal" data-bs-target="#staticBackdrop<%= tour.id %>">
                 See More
-              </button>
+                </button>
+              <% else %>
+                <%= link_to "See more", new_user_session_path, class: "btn btn-primary child" %>
+              <%end%>
 
 
               <div class="modal fade" id="staticBackdrop<%= tour.id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -51,11 +53,17 @@
                       </div>
 
 
-                      <p><strong>Date:</strong><%= tour.date %></p><br>
-                      <p><strong>Time:</strong><%= tour.time.strftime("%H:%M") %></p><br>
-                      <p><strong>Start point:</strong><%= tour.start_point %></p><br>
-                      <p><strong>Capacity:</strong><%= tour.capacity %></p><br>
-                      <p><strong>Description:</strong><%= tour.description %></p><br>
+                      <p><strong>Date: </strong><%= tour.date %></p><br>
+                      <p><strong>Time: </strong><%= tour.time.strftime("%H:%M") %></p><br>
+                      <p><strong>Capacity: </strong><%= tour.capacity %></p><br>
+                      <p><strong>Description: </strong><%= tour.description %></p><br>
+                      <p><strong>Start point: </strong><%= tour.start_point %></p><br>
+                      <div class="map" style="width: 100%; height: 300px;"
+                        data-controller="map"
+                        data-map-markers-value="<%= @markers.find{|i| i[:lat]== tour.latitude}.to_json %>"
+                        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+                        data-map-target="container">
+                      </div>
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
 
