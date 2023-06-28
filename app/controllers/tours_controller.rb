@@ -1,4 +1,6 @@
 class ToursController < ApplicationController
+  skip_before_action :authenticate_user!, only: :index
+
   def index
     @tours = policy_scope(Tour)
     @markers = @tours.geocoded.map do |tour|
