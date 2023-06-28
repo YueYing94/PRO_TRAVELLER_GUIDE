@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-
+  helper_method :message
+  helper_method :chatrooms
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :address, :image, :description])
@@ -9,19 +10,26 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :address, :image, :description])
   end
 
+  def message
+    @message = Message.new
+  end
+
+  def chatrooms
+    @chatrooms = []
+    Chatroom.all.each do |chatroom|
+      if
+        current_user == chatroom.receiver || current_user == chatroom.asker
+        @chatrooms << chatroom
+      end
+    end
+    @chatrooms
+  end
+
   before_action :authenticate_user!
   include Pundit::Authorization
 
-  # Pundit: allow-list approach
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
   after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
-
-  # Uncomment when you *really understand* Pundit!
-  # rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  # def user_not_authorized
-  #   flash[:alert] = "You are not authorized to perform this action."
-  #   redirect_to(root_path)
-  # end
 
   private
 
