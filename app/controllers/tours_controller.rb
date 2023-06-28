@@ -10,7 +10,6 @@ class ToursController < ApplicationController
     end
 
     @booking = Booking.new
-    @user = User.new
   end
 
   def create
@@ -33,11 +32,6 @@ class ToursController < ApplicationController
     authorize @tour
     @tour.destroy
     redirect_to profile_path, status: :see_other
-  end
-
-  def show
-    @tour = Tour.find(params[:id])
-    authorize @tour
   end
 
   private

@@ -7,7 +7,7 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @booking.status = "pending..."
     if @booking.save
-      redirect_to tour_path(@tour)
+      redirect_to profile_path
     else
       render "tours/index", status: :unprocessable_entity
     end
