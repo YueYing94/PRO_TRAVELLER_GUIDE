@@ -8,8 +8,9 @@
     <div class="badge-box">
       <h1>badges</h1>
     </div>
-
-    <button class="chat-box"><h3 class="my-1">Chat with Me</h3></button>
+    <%= button_to chatrooms_path(receiver_id: @user.id), method: :post, class: "chat-box" do %>
+      <h3 class="my-2">Chat with Me</h3>
+    <% end %>
   </div>
 
 
