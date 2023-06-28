@@ -16,6 +16,8 @@ class ToursController < ApplicationController
     if params[:date_query].present?
       @tours = @tours.where(date: params[:date_query])
     end
+
+    @booking = Booking.new
   end
 
   def create
