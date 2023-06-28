@@ -6,8 +6,12 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 require "open-uri"
+Message.destroy_all
+Chatroom.destroy_all
 Tour.destroy_all
 User.destroy_all
+Booking.destroy_all
+
 
 file = URI.open("https://images.unsplash.com/photo-1607770421266-f7a08a856359?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTkxfHx3b21lbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60")
 maike = User.new(first_name: "Maike", last_name: "Müller", description: "Hello there! I'm Maike, a passionate graphic designer with a love for creativity and visual storytelling, you can find me exploring art galleries, seeking inspiration from nature, or experimenting with new design techniques.", address: "120 Av. Lucien Salentiny, 9080 Ettelbruck, Luxembourg", email: "maike.mueller@gmail.com", encrypted_password: 2891312, password: 2891312)
@@ -82,6 +86,5 @@ mountain_climbing = Tour.new(name: "Mountain-climbing", date: "01/07/2023", time
 mountain_climbing.photos.attach(io: file1, filename: "Mountainclimb.png", content_type: "image/png")
 mountain_climbing.photos.attach(io: file2, filename: "Mountainclimb.png", content_type: "image/png")
 mountain_climbing.photos.attach(io: file3, filename: "Mountainclimb.png", content_type: "image/png")
->>>>>>> 01f6f67a452befea8c7af1e7cfdbfb2b987e5fa2
 mountain_climbing.user = max
 mountain_climbing.save!
