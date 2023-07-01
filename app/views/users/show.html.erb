@@ -76,7 +76,7 @@
                       <p><strong>Date:</strong><%= tour.date %></p><br>
                       <p><strong>Time:</strong><%= tour.time.strftime("%H:%M") %></p><br>
                       <p><strong>Start point:</strong><%= tour.start_point %></p><br>
-                      <p><strong>Capacity:</strong><%= tour.capacity %></p><br>
+                      <p><strong>Capacity: </strong><%= tour.bookings.count %>/<%= tour.capacity %></p><br>
                       <p><strong>Description:</strong><%= tour.description %></p><br>
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
@@ -107,7 +107,7 @@
 
               <div class="card-body my-1 py-0">
                 <h5 class='my-0'><%= tour.name %></h5>
-                <p class='my-0'>0/<%= tour.capacity %></p>
+                <p class='my-0'><%= tour.bookings.count %>/<%= tour.capacity %></p>
 
 
               </div>
@@ -179,7 +179,7 @@
                       <p><strong>Date:</strong><%= booking.tour.date %></p><br>
                       <p><strong>Time:</strong><%= booking.tour.time.strftime("%H:%M") %></p><br>
                       <p><strong>Start point:</strong><%= booking.tour.start_point %></p><br>
-                      <p><strong>Capacity:</strong><%= booking.tour.capacity %></p><br>
+                      <p><strong>Capacity: </strong><%= booking.tour.bookings.count %>/<%= booking.tour.capacity %></p><br>
                       <p><strong>Description:</strong><%= booking.tour.description %></p><br>
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
@@ -221,7 +221,7 @@
 
               <div class="card-body my-1 py-0">
                 <h5 class='my-0'><%= booking.tour.name %></h5>
-                <p class='my-0'>0/<%= booking.tour.capacity %></p>
+                <p class='my-0'><%= booking.tour.bookings.count %>/<%= booking.tour.capacity %></p>
 
 
               </div>
