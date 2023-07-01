@@ -14,7 +14,7 @@
   justify-content: center;
   align-items: center;
   margin: 10px;
-  border: 2px solid #000000;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .badge-box {
@@ -27,7 +27,7 @@
   justify-content: flex-start;
   align-items: center;
   margin: 10px;
-  border: 2px solid #000000;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .chat-box {
@@ -35,7 +35,8 @@
   border-radius: 10px;
   margin: 10px;
   background-color: rgb(255, 255, 255);
-  border: 2px solid #000000;
+  border: 0px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .about-box {
@@ -43,7 +44,7 @@
   border-radius: 10px;
   margin: 10px;
   background-color: rgb(255, 255, 255);
-  border: 2px solid #000000;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .create-card {
@@ -52,7 +53,8 @@
   height: 250px;
   border-radius: 5px;
   background-color: #f0f0f0;
-  border: 2px solid #000000;
+  border: 1px solid #EEAC41 !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center;
   cursor: pointer;
 }
@@ -60,7 +62,7 @@
 .plus-sign {
   font-size: 40px;
   font-weight: bold;
-  color: #333333;
+  color: #EEAC41;
 }
 
 .trip-card {
@@ -68,7 +70,7 @@
   height: 250px;
   border-radius: 5px;
   background-color: #f0f0f0;
-  border: 2px solid #000000;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .rounded-image {
@@ -89,11 +91,10 @@
   border-radius: 10px;
   margin: 10px;
   background-color: rgb(255, 255, 255);
-  border: 2px solid #000000;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .height {
   height: 100px;
   overflow-y: scroll;
 }
-
