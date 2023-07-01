@@ -26,18 +26,18 @@
         <% if booking.status == "pending..." %>
 
 
+
           <div class="card about-box">
             <div class="card-header"><h1>Requests to join your tours</h1></div>
             <div class="card-body">
 
               <div class="row row-cols-1 row-cols-md-3 g-4">
-                <% @user.tours.each do |tour| %>
-
+                <% booking.tour.bookings.each do |booking| %>
                   <div class="col">
                     <div class="card booking-card">
 
                       <div class="card-body my-1 py-0">
-                        <h5 class='my-0'>New booking for: <br> <%= tour.name %> <br> <br>from: <br> <%= booking.user.first_name %></h5>
+                        <h5 class='my-0'>New booking for: <br> <%= booking.tour.name %> <br> <br>from: <br> <%= booking.user.first_name %></h5>
                         <br>
                         <div>
 
