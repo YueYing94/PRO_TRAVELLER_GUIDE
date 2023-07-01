@@ -9,5 +9,4 @@ Rails.application.routes.draw do
   resources :chatrooms do
     resources :messages, only: :create
   end
-  
 end
