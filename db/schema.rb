@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_24_145040) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_01_123826) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,6 +72,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_24_145040) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "giver_id"
+    t.bigint "geter_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "star"
+    t.string "badge"
+    t.index ["geter_id"], name: "index_reviews_on_geter_id"
+    t.index ["giver_id"], name: "index_reviews_on_giver_id"
+  end
+
   create_table "tours", force: :cascade do |t|
     t.string "name"
     t.date "date"
@@ -112,5 +123,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_24_145040) do
   add_foreign_key "chatrooms", "users", column: "receiver_id"
   add_foreign_key "messages", "chatrooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "reviews", "users", column: "geter_id"
+  add_foreign_key "reviews", "users", column: "giver_id"
   add_foreign_key "tours", "users"
 end

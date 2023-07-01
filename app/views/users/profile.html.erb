@@ -119,11 +119,13 @@
 
           <div class="col">
             <div class="card trip-card parent">
-              <button type="button" class="btn btn-primary child" data-bs-toggle="modal" data-bs-target="#staticBackdrop<%= booking.tour.id %>">
-                See More
-              </button>
-
-
+              <% if booking.status == 'pending' %>
+                <button type="button" class="btn btn-primary child" data-bs-toggle="modal" data-bs-target="#staticBackdrop<%= booking.tour.id %>">
+                  See More
+                </button>
+              <% else %>
+                <%= link_to 'Review', new_user_review_path(booking.tour.user), class: 'btn btn-primary child' %>
+              <% end %>
 
               <div class="modal fade" id="staticBackdrop<%= booking.tour.id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
