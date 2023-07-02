@@ -10,11 +10,11 @@ class BookingPolicy < ApplicationPolicy
     true
   end
 
-  def accept_booking?
+  def accept?
     true
   end
 
-  def decline_booking?
+  def decline?
     true
   end
 end

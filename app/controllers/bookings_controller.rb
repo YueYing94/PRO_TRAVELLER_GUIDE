@@ -14,7 +14,7 @@ class BookingsController < ApplicationController
   end
 
 
-  def accept_booking
+  def accept
     @booking = Booking.find(params[:id])
     authorize @booking
     @booking.update(status: "Accepted!")
@@ -22,7 +22,7 @@ class BookingsController < ApplicationController
     redirect_to profile_path
   end
 
-  def decline_booking
+  def decline
     @booking = Booking.find(params[:id])
     authorize @booking
     @booking.update(status: "Declined")

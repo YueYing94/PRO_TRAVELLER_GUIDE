@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   resources :tours do
     resources :bookings, only: [:create, :new] do
       member do
-        patch :accept_booking
-        patch :decline_booking
+        patch :accept
+        patch :decline
       end
     end
   end
