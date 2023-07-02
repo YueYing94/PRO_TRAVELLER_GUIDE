@@ -42,12 +42,13 @@
                         <div>
 
 
-                          <button type="button" class="btn btn-primary child2"">
-                            Accecpt
-                          </button>
-                          <button type="button" class="btn btn-secondary child2"">
-                            Decline
-                          </button>
+                          <%= form_tag accept_booking_tour_booking_path(booking.tour, booking), method: :patch do %>
+                          <%= submit_tag "Accept", class: "btn btn-primary child2" %>
+                          <% end %>
+
+                          <%= form_tag decline_booking_tour_booking_path(booking.tour, booking), method: :patch do %>
+                          <%= submit_tag "Decline", class: "btn btn-secondary child2" %>
+                          <% end %>
 
 
                         </div>

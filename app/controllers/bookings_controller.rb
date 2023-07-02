@@ -12,4 +12,20 @@ class BookingsController < ApplicationController
       render "tours/index", status: :unprocessable_entity
     end
   end
+
+
+  def accept_booking
+    @booking = Booking.find(params[:id])
+    authorize @booking
+    @booking.update(status: "Accepted!")
+    @booking.save
+    redirect_to profile_path
+  end
+
+  def decline_booking
+    @booking = Booking.find(params[:id])
+    authorize @booking
+    @booking.update(status: "Declined")
+    redirect_to profile_path
+  end
 end
