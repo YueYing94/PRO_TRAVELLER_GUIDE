@@ -35,23 +35,25 @@
                 <% booking.tour.bookings.each do |booking| %>
                   <div class="col">
                     <div class="card booking-card">
-
-                      <div class="card-body my-1 py-0">
-                        <h5 class='my-0'>New booking for: <br> <%= booking.tour.name %> <br> <br>from: <br> <%= booking.user.first_name %></h5>
-                        <br>
-                        <div>
-
-
+                      <div class="booking-card-body">
+                        <h5>
+                          New booking for: <br>
+                          <%= booking.tour.name %> <br>
+                          from: <br>
+                          <a href="<%= user_path(booking.user) %>" target="_blank" class="profile-link"><%= booking.user.first_name %></a>
+                        </h5>
+                        <div class="button-container">
                           <%= form_tag accept_tour_booking_path(booking.tour, booking), method: :patch do %>
-                          <%= submit_tag "Accept", class: "btn btn-primary child2" %>
+                          <%= button_tag "Accept", class: "btn btn-primary", type: "submit" %>
                           <% end %>
 
                           <%= form_tag decline_tour_booking_path(booking.tour, booking), method: :patch do %>
-                          <%= submit_tag "Decline", class: "btn btn-secondary child2" %>
+                          <%= button_tag "Decline", class: "btn btn-secondary", type: "submit" %>
                           <% end %>
-
-
                         </div>
+
+
+
 
                         <div class="modal fade" id="exampleModal2<%= tour.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-scrollable">

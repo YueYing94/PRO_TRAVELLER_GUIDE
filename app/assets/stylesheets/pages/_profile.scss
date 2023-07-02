@@ -98,13 +98,35 @@
 }
 
 .booking-card {
-  width: 65%;
-  height: 210px;
+  width: 200px;
+  height: 165px;
   border-radius: 5px;
   background-color: #f0f0f0;
   border: 2px solid #000000;
-  justify-content: space-evenly;
-  padding-top: 5px;
-  padding-left: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
 
+  .booking-card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .profile-link {
+      color: black;
+      text-decoration: none;
+
+      &:hover {
+        color: orange;
+      }
+    }
+  }
+
+  .button-container {
+    display: flex;
+    gap: 10px;
+  }
 }
