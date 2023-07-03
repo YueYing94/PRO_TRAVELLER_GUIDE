@@ -1,7 +1,7 @@
 <div class="main-div">
   <div>
     <div class="profile-box">
-      <%= image_tag(current_user.image, style:'height: 150px; width: 150px; border-radius: 50%; border: 2px solid #000000;') %><br>
+      <%= image_tag(current_user.image, style:'height: 150px; width: 150px; border-radius: 50%;') %><br>
       <h1><%= current_user.first_name %></h1>
     </div>
 
@@ -135,11 +135,11 @@
                   <div class="d-flex">
 
                     <button type="button" class="edit-button" data-bs-toggle="modal" data-bs-target="#exampleModal2<%= tour.id%>">
-                      <p><i class="fa-solid fa-pen-to-square"></i></p>
+                      <p><i class="fa-solid fa-pen-to-square" style="color: #EEAC41;"></i></p>
                     </button>
 
                     <%= link_to tour_path(tour), class: "edit-button", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-                      <i class="fa-solid fa-trash-can"></i>
+                      <i class="fa-solid fa-trash-can" style="color: #EEAC41;"></i>
                     <% end %>
                   </div>
 
