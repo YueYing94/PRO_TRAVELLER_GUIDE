@@ -3,12 +3,24 @@
     <div class="profile-box">
       <%= image_tag(@user.image, style:'height: 150px; width: 150px; border-radius: 50%; border: 2px solid #000000;') %><br>
       <h1><%= @user.first_name %></h1>
+      <% if !@user.reviews_as_geter.empty? %>
+        <% sum = 0 %>
+        <% @user.reviews_as_geter.each do |review| %>
+          <% sum += review.star%>
+        <% end %>
+        <h4>
+          <% (sum / @user.reviews_as_geter.count).times do %>
+            <i class="fa-solid fa-star" style="color: #ffc107;"></i>
+          <% end %>
+        </h4>
+      <% end %>
     </div>
 
     <div class="badge-box">
       <h1>badges</h1>
+
       <% @user.reviews_as_geter.each do |review| %>
-      <%= review.star %><%= review.badge %>
+        <%= review.badge %>
       <% end %>
     </div>
     <%= button_to chatrooms_path(receiver_id: @user.id), method: :post, class: "chat-box" do %>

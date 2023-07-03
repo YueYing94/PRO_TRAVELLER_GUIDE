@@ -3,6 +3,17 @@
     <div class="profile-box">
       <%= image_tag(current_user.image, style:'height: 150px; width: 150px; border-radius: 50%; border: 2px solid #000000;') %><br>
       <h1><%= current_user.first_name %></h1>
+      <% if !current_user.reviews_as_geter.empty? %>
+        <% sum = 0 %>
+        <% @user.reviews_as_geter.each do |review| %>
+          <% sum += review.star%>
+        <% end %>
+        <h4>
+          <% (sum / current_user.reviews_as_geter.count).times do %>
+            <i class="fa-solid fa-star" style="color: #ffc107;"></i>
+          <% end %>
+        </h4>
+      <% end %>
     </div>
 
     <div class="badge-box">
