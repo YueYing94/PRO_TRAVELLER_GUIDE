@@ -7,3 +7,59 @@
 body {
   background-color: #76ac71 !important;
 }
+
+
+
+.btn.bookmark-button {
+  padding: 0;
+  background: none;
+  border: none;
+  color: orange;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.btn.bookmark-button i {
+  transition: color 0.3s;
+}
+
+.btn.bookmark-button:hover i {
+  color: red;
+}
+
+.btn.bookmark-button.active i {
+  color: red;
+}
+
+.card .bookmark-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+}
+
+.btn {
+  --bg: #000;
+  --hover-bg: #ff90e8;
+  --hover-text: #000;
+  color: #fff;
+  border: 1px solid var(--bg);
+  border-radius: 4px;
+  padding: 0.5em 1.5em;
+  background: #EEAC41;
+  transition: 0.2s;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.btn:hover {
+  color: var(--hover-text);
+  transform: translate(-0.25rem, -0.25rem);
+  background:  #EEAC41(--hover-bg);
+  box-shadow: 0.25rem 0.25rem var(--bg);
+}
+
+.btn:active {
+  transform: translate(0);
+  box-shadow: none;
+}
