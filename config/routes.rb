@@ -9,5 +9,7 @@ Rails.application.routes.draw do
   resources :chatrooms do
     resources :messages, only: :create
   end
-  
+  resources :tours do
+    post 'bookmarks', to: 'bookmarks#create', as: :bookmarks
+  end
 end
