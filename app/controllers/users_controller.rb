@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def profile
     @user = current_user
+    @bookmarked_tours = @user.bookmarked_tours
     @tour = Tour.new
     authorize current_user
     @booking = Booking.new

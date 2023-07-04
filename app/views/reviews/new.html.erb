@@ -1,10 +1,10 @@
 <div class='review-container'>
   <div class='review_box d-flex flex-column align-items-center'>
-    <%= image_tag(@geter.image, style:'height: 150px; width: 150px; border-radius: 50%; border: 2px solid #000000;') %><br>
+    <%= image_tag(@geter.image, style:'height: 150px; width: 150px; border-radius: 50%;') %><br>
     <h2 class='my-3'>Please rate <%= @geter.first_name %> out of 5 stars</h2>
     <%= simple_form_for [@geter, @review] do |f| %>
       <%= f.input :star, collection: (1..5).to_a, input_html: {data: {controller: "star-rating"}}, label: false %>
-      <%= f.input :badge, collection: Review::BADGE %>
+      <%= f.input :badge, collection: Review::BADGE, as: :check_boxes, input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
       <%= f.submit class: "btn btn-primary", value: "Submit" %>
     <% end %>
   </div>

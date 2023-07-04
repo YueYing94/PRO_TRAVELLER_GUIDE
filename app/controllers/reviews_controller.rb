@@ -12,13 +12,13 @@ class ReviewsController < ApplicationController
     @review.giver = @giver
     @review.geter = @geter
     authorize @review
+    badge = params[:review][:badge].reject!(&:empty?)
+    @review.badge = badge
     if @review.save
       redirect_to user_path(@geter)
     else
       render "reviews/new", status: :unprocessable_entity
     end
-
-
   end
 
   private

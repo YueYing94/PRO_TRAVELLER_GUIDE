@@ -10,102 +10,84 @@
               <span><%= tour.description %></span><br>
               <% if user_signed_in? %>
                 <button type="button" class="btn btn-primary child" data-bs-toggle="modal" data-bs-target="#staticBackdrop<%= tour.id %>">
-                See More
+                  See More
                 </button>
-              <% else %>
-                <%= link_to "See more", new_user_session_path, class: "btn btn-primary child" %>
-              <%end%>
-
-
-              <div class="modal fade" id="staticBackdrop<%= tour.id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="staticBackdropLabel"><%= tour.name %></h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-
-
-                      <div class='my-3'>
-                        <div id="carousel_id<%= tour.id %>" class="carousel slide">
-
-                          <div class="carousel-inner">
-                            <% tour.photos.each_with_index do |photo, index| %>
-                              <div id="carousel_item_<%= index %>" class="card-image carousel-item <%= index == 0 ? 'active' : '' %>">
-
-                                <%= cl_image_tag photo.key, height: 160, width: 300, crop: :fill, class: 'rounded-image'%>
-                              </div>
-
-                            <% end %>
-                          </div>
-
-                          <button class="carousel-control-prev" type="button" data-bs-target="#carousel_id<%= tour.id %>" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                          </button>
-                          <button class="carousel-control-next" type="button" data-bs-target="#carousel_id<%= tour.id %>" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                          </button>
-
-                        </div>
-                      </div>
-
-
-                      <p><strong>Date: </strong><%= tour.date %></p><br>
-                      <p><strong>Time: </strong><%= tour.time.strftime("%H:%M") %></p><br>
-                      <p><strong>Capacity: </strong><%= tour.capacity %></p><br>
-                      <p><strong>Description: </strong><%= tour.description %></p><br>
-                      <p><strong>Start point: </strong><%= tour.start_point %></p><br>
-                      <div class="map" style="width: 100%; height: 300px;"
-                        data-controller="map"
-                        data-map-markers-value="<%= @markers.find{|i| i[:lat]== tour.latitude}.to_json %>"
-                        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
-                        data-map-target="container">
-                      </div>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-between">
-
-
-
-
-                    <%= link_to user_path(tour.user), target: "_blank", class: "edit-button text-warning" do %>
-                      <div class="d-flex align-items-center">
-                        <%= cl_image_tag tour.user.image.key, style: 'height: 50px; width: 50px;', class: "avatar" %>
-                        <p class="my-0 mx-2"><strong>See <%= tour.user.first_name %>'s profile</strong></p>
-                        <br>
-                      </div>
-                    <% end %>
-
-
-                    <% if user_signed_in? %>
-                      <% if tour.user.id == current_user.id %>
-                        <p>THIS IS YOUR TOUR</p>
-                      <% elsif tour.bookings.pluck(:user_id).include?(current_user.id) == true  %>
-                        <p>BOOKED!</p>
-                      <% elsif tour.bookings.count < tour.capacity %>
-                        <%= simple_form_for [tour, @booking] do |f| %>
-                        <%= f.submit "Book now!", class:"btn btn-primary child" %>
-                        <% end %>
-                      <% else %>
-                        <p>this tour is full!</p>
-                      <% end %>
-                    <% end %>
-
-
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
+                <% if current_user.bookmarked?(tour) %>
+                  <%= link_to profile_path(current_user), id: 'bookmark-link', class: 'btn btn-outline-danger bookmark-button' do %>
+                   <i class="fas fa-heart bookmark-icon"></i>
+               <% end %>
+                   <% else %>
+                    <%= link_to tour_bookmarks_path(tour), data: { turbo_method: :post }, id: 'bookmark-link', class: 'btn btn-outline-danger bookmark-button' do %>
+               <i class="far fa-heart bookmark-icon"></i>
+            <% end %>
+            <% end %>
+              <% end %>
             </div>
           </div>
         </div>
+      <% else %>
+       <%= link_to "See more", new_user_session_path, class: "btn btn-primary" %>
       <% end %>
+
+      <div class="modal fade" id="staticBackdrop<%= tour.id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel"><%= tour.name %></h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class='my-3'>
+                <div id="carousel_id<%= tour.id %>" class="carousel slide">
+                  <div class="carousel-inner">
+                    <% tour.photos.each_with_index do |photo, index| %>
+                      <div id="carousel_item_<%= index %>" class="card-image carousel-item <%= index == 0 ? 'active' : '' %>">
+                        <%= cl_image_tag photo.key, height: 160, width: 300, crop: :fill, class: 'rounded-image'%>
+                      </div>
+                    <% end %>
+                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carousel_id<%= tour.id %>" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carousel_id<%= tour.id %>" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
+              </div>
+              <p><strong>Date: </strong><%= tour.date %></p><br>
+              <p><strong>Time: </strong><%= tour.time.strftime("%H:%M") %></p><br>
+              <p><strong>Capacity: </strong><%= tour.capacity %></p><br>
+              <p><strong>Description: </strong><%= tour.description %></p><br>
+              <p><strong>Start point: </strong><%= tour.start_point %></p><br>
+              <div class="map" style="width: 100%; height: 300px;" data-controller="map" data-map-markers-value="<%= @markers.find{|i| i[:lat]== tour.latitude}.to_json %>" data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>" data-map-target="container">
+              </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+              <%= link_to user_path(tour.user), target: "_blank", class: "edit-button text-warning" do %>
+                <div class="d-flex align-items-center">
+                  <%= cl_image_tag tour.user.image.key, style: 'height: 50px; width: 50px;', class: "avatar" %>
+                  <p class="my-0 mx-2"><strong>See <%= tour.user.first_name %>'s profile</strong></p>
+                </div>
+              <% end %>
+              <% if user_signed_in? %>
+                <% if tour.user.id == current_user.id %>
+                  <p>THIS IS YOUR TOUR</p>
+                <% elsif tour.bookings.pluck(:user_id).include?(current_user.id) == true %>
+                  <p>BOOKED!</p>
+                <% elsif tour.bookings.count < tour.capacity %>
+                  <%= simple_form_for [tour, @booking] do |f| %>
+                    <%= f.submit "Book now!", class:"btn btn-primary child" %>
+                  <% end %>
+                <% else %>
+                  <p>This tour is full!</p>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
     <% end %>
   </div>
-
 </div>

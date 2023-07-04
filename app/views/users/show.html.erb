@@ -18,10 +18,19 @@
 
     <div class="badge-box">
       <h1>badges</h1>
-
+      <% array = [] %>
       <% @user.reviews_as_geter.each do |review| %>
-        <%= review.badge %>
+        <% array << review.badge %>
       <% end %>
+      <div>
+        <% array_count = array.flatten %>
+        <p>friendly:<%= array_count.count('friendly') %></p>
+        <p>knowledgeable:<%= array_count.count('knowledgeable') %></p>
+        <p>unique tour:<%= array_count.count('unique tour') %></p>
+        <p>funny:<%= array_count.count('funny') %></p>
+        <p>great for kids:<%= array_count.count('great for kids') %></p>
+        <p>would recommend:<%= array_count.count('would recommend') %></p>
+      </div>
     </div>
     <%= button_to chatrooms_path(receiver_id: @user.id), method: :post, class: "chat-box" do %>
       <h3 class="my-2">Chat with Me</h3>
