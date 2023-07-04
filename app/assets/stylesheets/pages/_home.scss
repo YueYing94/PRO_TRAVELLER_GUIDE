@@ -2,20 +2,22 @@
 .banner {
   background-size: cover;
   background-position: center;
-  border-radius: 15px ;
-  background-color: #589753;
-  opacity: 59%;
+  background-image: url("banner.jpg");
+  background-repeat: no-repeat;
+  height: 1000px;
+  width: 100%;
+  opacity: .8;
   padding: 200px 0;
 }
 
 .banner h1 {
   display:flex;
   justify-content: center;
-  margin: 0;
   color: #FCFFFE;
+  text-align: center;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   font-size: 50px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .banner p {
@@ -25,6 +27,7 @@
   font-weight:400;
   line-height: 48px;
   font-style: normal;
-  color: #121112;
+  color: #FCFFFE;
+  text-align: center;
   /*text-shadow: 1px 1px 3px rgba(0,0,0,0.2);*/
 }
