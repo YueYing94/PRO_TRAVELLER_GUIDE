@@ -23,9 +23,7 @@
 
     <% @user.tours.each do |tour| %>
       <% tour.bookings.each do |booking| %>
-        <% if booking.status == "pending..." %>
-
-
+        <% if tour.bookings.any? { |booking| booking.status == "pending..." } %>
 
           <div class="card about-box">
             <div class="card-header"><h1>Requests to join your tours</h1></div>
@@ -52,9 +50,6 @@
                           <% end %>
                         </div>
 
-
-
-
                         <div class="modal fade" id="exampleModal2<%= tour.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-scrollable">
                             <div class="modal-content">
@@ -73,19 +68,11 @@
                           </div>
                         </div>
 
-
                       </div>
-
-
-
                     </div>
                   </div>
-
                 <% end %>
-
               </div>
-
-
             </div>
           </div>
         <% end %>
