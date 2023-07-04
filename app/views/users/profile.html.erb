@@ -21,62 +21,66 @@
     </div>
 
 
+    <% pending_bookings = [] %>
     <% @user.tours.each do |tour| %>
       <% tour.bookings.each do |booking| %>
         <% if booking.status == "pending..." %>
+          <% pending_bookings << booking %>
+        <% end %>
+      <% end %>
+    <% end %>
 
-          <div class="card about-box">
-            <div class="card-header"><h1>Requests to join your tours</h1></div>
-            <div class="card-body">
+    <% if pending_bookings.any? %>
+      <div class="card about-box">
+        <div class="card-header">
+          <h1>Requests to join your tours</h1>
+        </div>
+        <div class="card-body">
+          <div class="row row-cols-1 row-cols-md-3 g-4">
+            <% pending_bookings.each do |booking| %>
+              <div class="col">
+                <div class="card booking-card">
+                  <div class="booking-card-body">
+                    <h5>
+                      New booking for: <br>
+                      <%= booking.tour.name %> <br>
+                      from: <br>
+                      <a href="<%= user_path(booking.user) %>" target="_blank" class="profile-link"><%= booking.user.first_name %></a>
+                    </h5>
+                    <div class="button-container">
+                      <%= form_tag accept_tour_booking_path(booking.tour, booking), method: :patch do %>
+                        <%= button_tag "Accept", class: "btn btn-primary", type: "submit" %>
+                      <% end %>
 
-              <div class="row row-cols-1 row-cols-md-3 g-4">
-                <% booking.tour.bookings.each do |booking| %>
-                  <div class="col">
-                    <div class="card booking-card">
-                      <div class="booking-card-body">
-                        <h5>
-                          New booking for: <br>
-                          <%= booking.tour.name %> <br>
-                          from: <br>
-                          <a href="<%= user_path(booking.user) %>" target="_blank" class="profile-link"><%= booking.user.first_name %></a>
-                        </h5>
-                        <div class="button-container">
-                          <%= form_tag accept_tour_booking_path(booking.tour, booking), method: :patch do %>
-                          <%= button_tag "Accept", class: "btn btn-primary", type: "submit" %>
-                          <% end %>
+                      <%= form_for [booking.tour, booking], method: :delete do |f| %>
+                        <%= f.button "Decline", class: "btn btn-secondary", type: "submit" %>
+                      <% end %>
+                    </div>
 
-                          <%= form_for [booking.tour, booking], method: :delete do |f| %>
-                          <%= f.button "Decline", class: "btn btn-secondary", type: "submit" %>
-                          <% end %>
-                        </div>
-
-                        <div class="modal fade" id="exampleModal2<%= tour.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog-scrollable">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">edit a tour</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body">
-                                <div class='container'>
-                                  <div class="create-edit-form">
-                                    <%= render "shared/form", tour: tour %>
-                                  </div>
-                                </div>
+                    <div class="modal fade" id="exampleModal2<%= booking.tour.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">edit a tour</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class='container'>
+                              <div class="create-edit-form">
+                                <%= render "shared/form", tour: booking.tour %>
                               </div>
                             </div>
                           </div>
                         </div>
-
                       </div>
                     </div>
                   </div>
-                <% end %>
+                </div>
               </div>
-            </div>
+            <% end %>
           </div>
-        <% end %>
-      <% end %>
+        </div>
+      </div>
     <% end %>
 
     <div class="card about-box">
