@@ -23,7 +23,7 @@
 
     <% @user.tours.each do |tour| %>
       <% tour.bookings.each do |booking| %>
-        <% if tour.bookings.any? { |booking| booking.status == "pending..." } %>
+        <% if booking.status == "pending..." %>
 
           <div class="card about-box">
             <div class="card-header"><h1>Requests to join your tours</h1></div>
