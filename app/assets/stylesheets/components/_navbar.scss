@@ -27,9 +27,10 @@
 
 .search{
   content: url('https://api.iconify.design/ph/magnifying-glass.svg?color=white');
-  border-top-right-radius: 20px ;
-  border-bottom-right-radius: 20px ;
-
+  border-top-right-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
 }
 
 .btn-primary{
