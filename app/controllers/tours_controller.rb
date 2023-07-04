@@ -13,10 +13,12 @@ class ToursController < ApplicationController
     if params[:location_query].present?
       @tours = @tours.where("start_point ILIKE ?", "%#{params[:location_query]}%")
     end
-    if params[:date_query].present?
-      @tours = @tours.where(date: params[:date_query])
+    if params[:start_date].present? && params[:end_date].present?
+      @tours = Tour.where(date: params[:start_date]..params[:end_date])
     end
-
+    if params[:location_query].present? && params[:start_date].present? && params[:end_date].present?
+      @tours = Tour.where(date: params[:start_date]..params[:end_date]).search_by_start_point(params[:location_query])
+    end
     @booking = Booking.new
   end
 

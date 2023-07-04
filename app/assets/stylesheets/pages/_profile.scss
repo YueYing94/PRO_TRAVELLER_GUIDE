@@ -1,10 +1,13 @@
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: "Sora";
   font-weight: 600;
   color: rgb(80, 75, 75);
 }
 
-p, h5 {
+p,
+h5 {
   color: rgb(80, 75, 75);
 }
 
@@ -16,7 +19,7 @@ p, h5 {
 
 .profile-box {
   width: 250px;
-  height: 250px;
+  height: 300px;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 1);
   display: flex;
@@ -29,7 +32,8 @@ p, h5 {
 
 .badge-box {
   width: 250px;
-  height: 300px;
+  height: 350px;
+  padding-top: 20px;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 1);
   display: flex;
@@ -44,7 +48,7 @@ p, h5 {
   width: 250px;
   border-radius: 10px;
   margin: 10px;
-  background-color:rgba(255, 255, 255, 1);
+  background-color: rgba(255, 255, 255, 1);
   border: 0px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -63,7 +67,7 @@ p, h5 {
   height: 250px;
   border-radius: 5px;
   background-color: #f0f0f0;
-  border: 1px solid #EEAC41 !important;
+  border: 1px solid #eeac41 !important;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center;
   cursor: pointer;
@@ -72,7 +76,7 @@ p, h5 {
 .plus-sign {
   font-size: 40px;
   font-weight: bold;
-  color: #EEAC41;
+  color: #eeac41;
 }
 
 .trip-card {
@@ -116,7 +120,6 @@ p, h5 {
   border: 2px solid #000000;
   margin-top: 10px;
 }
-
 
 .list {
   list-style-type: none;
