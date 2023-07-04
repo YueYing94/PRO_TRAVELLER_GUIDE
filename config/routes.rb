@@ -5,7 +5,6 @@ Rails.application.routes.draw do
     resources :bookings, only: [:create, :new, :destroy] do
       member do
         patch :accept
-        patch :decline
       end
     end
   end
