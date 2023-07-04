@@ -14,10 +14,6 @@ class BookingPolicy < ApplicationPolicy
     true
   end
 
-  def decline?
-    true
-  end
-
   def destroy?
     true
   end
