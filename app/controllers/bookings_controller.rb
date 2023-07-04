@@ -22,10 +22,16 @@ class BookingsController < ApplicationController
     redirect_to profile_path
   end
 
-  def decline
+  def destroy
     @booking = Booking.find(params[:id])
     authorize @booking
-    @booking.update(status: "Declined")
+    @booking.destroy
+    @booking.save
     redirect_to profile_path
   end
+
+  def pending?
+    status == 'pending...'
+  end
+
 end
