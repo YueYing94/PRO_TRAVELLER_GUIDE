@@ -86,3 +86,12 @@ mountain_climbing.photos.attach([io: file1, filename: "Mountainclimb1.png", cont
 
 mountain_climbing.user = max
 mountain_climbing.save!
+
+file1 = URI.open("https://images.pexels.com/photos/5858069/pexels-photo-5858069.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")
+file2 = URI.open("https://images.pexels.com/photos/2835547/pexels-photo-2835547.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")
+file3 = URI.open("https://images.unsplash.com/photo-1440186347098-386b7459ad6b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80")
+hiking = Tour.new(name: "Hiking", date: "28/06/2023", time: "11:00", descrhttpsiption: "Come explore and take in breathtaking views, come be one with nature! Come along with your hiking boots, water bottle and hat.", capacity: 4, duration: "120 minutes", start_point: "226, Delftweg, Overschie, Rotterdam")
+hiking.photos.attach([io: file1, filename: "Hiking1.png", content_type: "image/png"], [io: file2, filename: "Hiking2.png", content_type: "image/png"], [io: file3, filename: "Hiking3.png", content_type: "image/png"])
+
+hiking.user = yue
+hiking.save!
