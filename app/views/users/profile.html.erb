@@ -9,6 +9,9 @@
       <h1>badges</h1>
     </div>
 
+
+
+
   </div>
 
 
@@ -82,7 +85,7 @@
     <% end %>
 
     <div class="card about-box">
-      <div class="card-header"><h1>Tours I Organise</h1></div>
+      <div class="card-header"><h1>Tours I Organised</h1></div>
       <div class="card-body">
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -197,7 +200,7 @@
     </div>
 
     <div class="card about-box">
-      <div class="card-header"><h1>Tours I Join</h1></div>
+      <div class="card-header"><h1>Tours I Joined</h1></div>
       <div class="card-body">
 
       <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -322,19 +325,8 @@
 
         <% end %>
       </div>
-
-
       </div>
     </div>
-
-    <div class="card about-box">
-      <div class="card-header"><h1>Tours I Saved</h1></div>
-      <div class="card-body">
-        <p class="card-text"><%= current_user.description %></p>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 
@@ -353,5 +345,24 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+<div class="card about-box">
+  <div class="card-header">
+    <h1>Tour I Saved</h1>
+  </div>
+  <div class="card-body">
+    <% if @bookmarked_tours.present? %>
+      <ul class= "list">
+        <% @bookmarked_tours.each do |tour| %>
+          <li>
+           <%= link_to tour.name, tours_path(tour), style: 'color: #000000; font-weight: bold; text-decoration: none;' %>
+            - <%= cl_image_tag tour.user.image.key, style: 'height: 40px; width: 40px;', class: 'avatar' %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No bookmarked tours.</p>
+    <% end %>
   </div>
 </div>
