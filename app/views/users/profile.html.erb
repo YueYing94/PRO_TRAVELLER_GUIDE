@@ -291,27 +291,30 @@
               <%= cl_image_tag booking.tour.photos[0].key, height: 150, width: 300, crop: :fill, class: 'card-img-top'%>
 
 
-              <div class="card-body my-1 py-0">
-                <h5 class='my-0'><%= booking.tour.name %></h5>
-                <p class='my-0'><%= booking.tour.bookings.count %>/<%= booking.tour.capacity %></p>
+              <% if current_user.id == booking.user.id %>
+                <div class="card-body my-1 py-0">
+                  <h5 class='my-0'><%= booking.tour.name %></h5>
+                  <p class='my-0'><%= booking.tour.bookings.count %>/<%= booking.tour.capacity %></p>
 
-                <% if booking.status == "pending..." %>
-                  <div class="status-wrapper">
-                    <div class="status-circle pending"></div>
-                    <p class="status-text">Booking status: Pending...</p>
-                  </div>
-                <% elsif booking.status == "Accepted!" %>
-                  <div class="status-wrapper">
-                    <div class="status-circle confirmed"></div>
-                    <p class="status-text">Booking status: Confirmed!</p>
-                  </div>
-                <% elsif booking.status == "Completed!" %>
-                  <div class="status-wrapper">
-                    <div class="status-circle completed"></div>
-                    <p class="status-text">Booking status: Completed!</p>
-                  </div>
-                <% end %>
-              </div>
+
+                  <% if booking.status == "pending..." %>
+                    <div class="status-wrapper">
+                      <div class="status-circle pending"></div>
+                      <p class="status-text">Booking: Pending...</p>
+                    </div>
+                  <% elsif booking.status == "Accepted!" %>
+                    <div class="status-wrapper">
+                      <div class="status-circle confirmed"></div>
+                      <p class="status-text">Booking: Confirmed!</p>
+                    </div>
+                  <% elsif booking.status == "Completed!" %>
+                    <div class="status-wrapper">
+                      <div class="status-circle completed"></div>
+                      <p class="status-text">Booking: Completed!</p>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
 
 
             </div>
