@@ -42,25 +42,28 @@
           <div class="row row-cols-1 row-cols-md-3 g-4">
             <% pending_bookings.each do |booking| %>
               <div class="col">
-                <div class="card booking-card">
+                <div class="booking-card">
                   <div class="booking-card-body">
-
-                    <p>New booking for: <%= booking.tour.name %></p>
-                    <p>from: <a href="<%= user_path(booking.user) %>" target="_blank" class="profile-link"><%= booking.user.first_name %></a></p>
-
-                    <div class="button-container">
-                      <%= form_tag accept_tour_booking_path(booking.tour, booking), method: :patch do %>
-                        <%= button_tag "Accept", class: "btn btn-primary", type: "submit" %>
-                      <% end %>
-
-                      <%= form_for [booking.tour, booking], method: :delete do |f| %>
-                        <%= f.button "Decline", class: "btn btn-secondary", type: "submit" %>
-                      <% end %>
+                    <div class="left-column">
+                      <p>New booking for:</p>
+                      <h5><%= booking.tour.name %></h5>
+                      <p>from:</p>
+                      <h5><a href="<%= user_path(booking.user) %>" target="_blank" class="profile-link"><%= booking.user.first_name %></a></h5>
                     </div>
+                    <div class="right-column">
+                      <div class="button-container">
+                        <%= form_tag accept_tour_booking_path(booking.tour, booking), method: :patch do %>
+                          <%= button_tag "Accept", class: "btn btn-primary", type: "submit" %>
+                        <% end %>
 
-
+                        <%= form_for [booking.tour, booking], method: :delete do |f| %>
+                          <%= f.button "Decline", class: "btn btn-secondary", type: "submit" %>
+                        <% end %>
+                      </div>
+                    </div>
                   </div>
                 </div>
+
               </div>
             <% end %>
           </div>
