@@ -26,15 +26,21 @@ class ToursController < ApplicationController
     @tour = Tour.new(tour_params)
     @tour.user = current_user
     authorize @tour
-    @tour.save
-    redirect_to profile_path
+    if @tour.save
+      redirect_to profile_path
+    else
+      render "shared/form", tour:@tour, status: :unprocessable_entity
+    end
   end
 
   def update
     @tour = Tour.find(params[:id])
     authorize @tour
-    @tour.update(tour_params)
-    redirect_to profile_path
+    if @tour.update(tour_params)
+      redirect_to profile_path
+    else
+      render "shared/form", tour:@tour, status: :unprocessable_entity
+    end
   end
 
   def destroy

@@ -17,19 +17,19 @@
     </div>
 
     <div class="badge-box">
-      <h1>badges</h1>
+      <h1 class='mb-4'>badges</h1>
       <% array = [] %>
       <% current_user.reviews_as_geter.each do |review| %>
         <% array << review.badge %>
       <% end %>
       <div>
         <% array_count = array.flatten %>
-        <p>friendly:<%= array_count.count('friendly') %></p>
-        <p>knowledgeable:<%= array_count.count('knowledgeable') %></p>
-        <p>unique tour:<%= array_count.count('unique tour') %></p>
-        <p>funny:<%= array_count.count('funny') %></p>
-        <p>great for kids:<%= array_count.count('great for kids') %></p>
-        <p>would recommend:<%= array_count.count('would recommend') %></p>
+        <div  class="parent-img"><p><%= image_tag "3.png", class:"badge-img" %>friendly<div class='child-img'><%= array_count.count('friendly')%></div></p></div>
+        <div  class="parent-img"><p class="parent-img"><%= image_tag "1.jpg", class:"badge-img" %>knowledgeable<div class='child-img'><%= array_count.count('knowledgeable') %></div></p></div>
+        <div  class="parent-img"><p class="parent-img"><%= image_tag "6.png", class:"badge-img" %>adventurous<div class='child-img'><%= array_count.count('unique tour') %></div></p></div>
+        <div  class="parent-img"><p class="parent-img"><%= image_tag "2.png", class:"badge-img" %>funny<div class='child-img'><%= array_count.count('funny') %></div></p></div>
+        <div  class="parent-img"><p class="parent-img"><%= image_tag "4.png", class:"badge-img" %>great for kids<div class='child-img'><%= array_count.count('great for kids') %></div></p></div>
+        <div  class="parent-img"><p class="parent-img"><%= image_tag "5.png", class:"badge-img" %>would recommend<div class='child-img'><%= array_count.count('would recommend') %></div></p></div>
       </div>
     </div>
 
@@ -58,28 +58,28 @@
               <div class="card trip-card">
 
 
-                  <div id="carousel_id<%= tour.id %>" class="carousel slide">
+                <div id="carousel_id<%= tour.id %>" class="carousel slide">
 
-                    <div class="carousel-inner">
-                      <% tour.photos.each_with_index do |photo, index| %>
-                        <div id="carousel_item_<%= index %>" class="card-image carousel-item <%= index == 0 ? 'active' : '' %>">
+                  <div class="carousel-inner">
+                    <% tour.photos.each_with_index do |photo, index| %>
+                      <div id="carousel_item_<%= index %>" class="card-image carousel-item <%= index == 0 ? 'active' : '' %>">
 
-                          <%= cl_image_tag photo.key, height: 160, width: 300, crop: :fill, class: 'rounded-image'%>
-                        </div>
+                        <%= cl_image_tag photo.key, height: 160, width: 300, crop: :fill, class: 'rounded-image'%>
+                      </div>
 
-                      <% end %>
-                    </div>
-
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel_id<%= tour.id %>" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carousel_id<%= tour.id %>" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
-
+                    <% end %>
                   </div>
+
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carousel_id<%= tour.id %>" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carousel_id<%= tour.id %>" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+
+                </div>
 
 
 
@@ -151,7 +151,11 @@
                   See More
                 </button>
               <% else %>
-                <%= link_to 'Review', new_user_review_path(booking.tour.user), class: 'btn btn-primary child' %>
+                <% if booking.review %>
+                  <p class='child'>reviewed!</p>
+                <% else %>
+                  <%= link_to 'Review', new_user_review_path(booking.tour.user, name: booking.id), class: 'btn btn-primary child' %>
+                <% end %>
               <% end %>
 
               <div class="modal fade" id="staticBackdrop<%= booking.tour.id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

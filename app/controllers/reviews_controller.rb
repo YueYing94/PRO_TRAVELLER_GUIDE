@@ -1,16 +1,20 @@
 class ReviewsController < ApplicationController
   def new
     @geter = User.find(params[:user_id])
+    @booking = Booking.find(params[:name])
     @review = Review.new
     authorize @review
   end
 
   def create
+
     @geter = User.find(params[:user_id])
+    @booking = Booking.find(params[:booking][:id])
     @review = Review.new(review_params)
     @giver = current_user
     @review.giver = @giver
     @review.geter = @geter
+    @review.booking = @booking
     authorize @review
     badge = params[:review][:badge].reject!(&:empty?)
     @review.badge = badge
@@ -24,6 +28,6 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:star, :badge)
+    params.require(:review).permit(:star, :badge, :booking_id)
   end
 end

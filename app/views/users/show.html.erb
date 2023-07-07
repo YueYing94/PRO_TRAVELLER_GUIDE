@@ -17,19 +17,19 @@
     </div>
 
     <div class="badge-box">
-      <h1>badges</h1>
+      <h1 class='mb-4'>badges</h1>
       <% array = [] %>
       <% @user.reviews_as_geter.each do |review| %>
         <% array << review.badge %>
       <% end %>
       <div>
         <% array_count = array.flatten %>
-        <p>friendly:<%= array_count.count('friendly') %></p>
-        <p>knowledgeable:<%= array_count.count('knowledgeable') %></p>
-        <p>unique tour:<%= array_count.count('unique tour') %></p>
-        <p>funny:<%= array_count.count('funny') %></p>
-        <p>great for kids:<%= array_count.count('great for kids') %></p>
-        <p>would recommend:<%= array_count.count('would recommend') %></p>
+        <div  class="parent-img"><p><%= image_tag "3.png", class:"badge-img" %>friendly<div class='child-img'><%= array_count.count('friendly')%></div></p></div>
+        <div  class="parent-img"><p class="parent-img"><%= image_tag "1.jpg", class:"badge-img" %>knowledgeable<div class='child-img'><%= array_count.count('knowledgeable') %></div></p></div>
+        <div  class="parent-img"><p class="parent-img"><%= image_tag "6.png", class:"badge-img" %>adventurous<div class='child-img'><%= array_count.count('unique tour') %></div></p></div>
+        <div  class="parent-img"><p class="parent-img"><%= image_tag "2.png", class:"badge-img" %>funny<div class='child-img'><%= array_count.count('funny') %></div></p></div>
+        <div  class="parent-img"><p class="parent-img"><%= image_tag "4.png", class:"badge-img" %>great for kids<div class='child-img'><%= array_count.count('great for kids') %></div></p></div>
+        <div  class="parent-img"><p class="parent-img"><%= image_tag "5.png", class:"badge-img" %>would recommend<div class='child-img'><%= array_count.count('would recommend') %></div></p></div>
       </div>
     </div>
     <%= button_to chatrooms_path(receiver_id: @user.id), method: :post, class: "chat-box" do %>

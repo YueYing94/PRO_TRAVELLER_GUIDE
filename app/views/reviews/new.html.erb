@@ -5,6 +5,7 @@
     <%= simple_form_for [@geter, @review] do |f| %>
       <%= f.input :star, collection: (1..5).to_a, input_html: {data: {controller: "star-rating"}}, label: false %>
       <%= f.input :badge, collection: Review::BADGE, as: :check_boxes, input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
+      <%= hidden_field(:booking, :id) %>
       <%= f.submit class: "btn btn-primary", value: "Submit" %>
     <% end %>
   </div>
