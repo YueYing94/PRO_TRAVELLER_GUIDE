@@ -17,8 +17,10 @@
   <body>
 
    <%= render "shared/navbar" %>
-   <%= render "shared/flashes" %>
-   <%= yield %>
-   <%= render "shared/chatbox" %>
+   <div class='content'>
+     <%= render "shared/flashes" %>
+     <%= yield %>
+     <%= render "shared/chatbox" %>
+   </div>
   </body>
 </html>
