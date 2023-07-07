@@ -100,7 +100,7 @@
                       <p><strong>Date:</strong><%= tour.date %></p><br>
                       <p><strong>Time:</strong><%= tour.time.strftime("%H:%M") %></p><br>
                       <p><strong>Start point:</strong><%= tour.start_point %></p><br>
-                      <p><strong>Capacity:</strong><%= tour.capacity %></p><br>
+                      <p><strong>Capacity: </strong><%= tour.bookings.count %>/<%= tour.capacity %></p><br>
                       <p><strong>Description:</strong><%= tour.description %></p><br>
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
@@ -109,7 +109,9 @@
                       <% if tour.user.id == current_user.id %>
                         <p>THIS IS YOUR TOUR</p>
                       <% elsif tour.bookings.pluck(:user_id).include?(current_user.id) == true  %>
-                        <p>BOOKED!</p>
+                        <%= form_for [tour, tour.bookings.find_by(user_id: current_user.id)], method: :delete do |f| %>
+                        <%= f.button "Cancel Booking", class: "btn btn-primary child", type: "submit" %>
+                        <% end %>
                       <% elsif tour.bookings.count < tour.capacity %>
                         <%= simple_form_for [tour, @booking] do |f| %>
                         <%= f.submit "Book now!", class:"btn btn-primary child" %>
@@ -131,7 +133,7 @@
 
               <div class="card-body my-1 py-0">
                 <h5 class='my-0'><%= tour.name %></h5>
-                <p class='my-0'>0/<%= tour.capacity %></p>
+                <p class='my-0'><%= tour.bookings.count %>/<%= tour.capacity %></p>
 
 
               </div>
@@ -203,7 +205,7 @@
                       <p><strong>Date:</strong><%= booking.tour.date %></p><br>
                       <p><strong>Time:</strong><%= booking.tour.time.strftime("%H:%M") %></p><br>
                       <p><strong>Start point:</strong><%= booking.tour.start_point %></p><br>
-                      <p><strong>Capacity:</strong><%= booking.tour.capacity %></p><br>
+                      <p><strong>Capacity: </strong><%= booking.tour.bookings.count %>/<%= booking.tour.capacity %></p><br>
                       <p><strong>Description:</strong><%= booking.tour.description %></p><br>
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
@@ -221,15 +223,19 @@
                       <% if booking.tour.user.id == current_user.id %>
                         <p>THIS IS YOUR TOUR</p>
                       <% elsif booking.user.id == current_user.id  %>
-                        <p>BOOKED!</p>
+                        <%= form_for [booking.tour, booking], method: :delete do |f| %>
+                        <%= f.button "Cancel Booking", class: "btn btn-primary", type: "submit" %>
+                        <% end %>
                       <% elsif booking.tour.bookings.pluck(:user_id).include?(current_user.id) == true  %>
-                        <p>BOOKED!</p>
+                        <%= form_for [booking.tour, booking], method: :delete do |f| %>
+                        <%= f.button "Cancel Booking", class: "btn btn-primary", type: "submit" %>
+                        <% end %>
                       <% elsif booking.tour.bookings.count < booking.tour.capacity %>
                         <%= simple_form_for [booking.tour, @booking] do |f| %>
                         <%= f.submit "Book now!", class:"btn btn-primary child" %>
-                       <% end %>
+                        <% end %>
                       <% else %>
-                        <p>this tour is full!</p>
+                        <p>Sorry this tour is full!</p>
                       <% end %>
 
 
@@ -245,7 +251,7 @@
 
               <div class="card-body my-1 py-0">
                 <h5 class='my-0'><%= booking.tour.name %></h5>
-                <p class='my-0'>0/<%= booking.tour.capacity %></p>
+                <p class='my-0'><%= booking.tour.bookings.count %>/<%= booking.tour.capacity %></p>
 
 
               </div>

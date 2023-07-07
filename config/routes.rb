@@ -5,14 +5,16 @@ Rails.application.routes.draw do
     resources :reviews, only: [:create, :new]
   end
   resources :tours do
-    resources :bookings, only: [:create, :new]
+    resources :bookings, only: [:create, :new, :destroy] do
+      member do
+        patch :accept
+      end
+    end
+    post 'bookmarks', to: 'bookmarks#create', as: :bookmarks
   end
   root to: "pages#home"
   get '/explorers/:id', to: "users#show", as: :user
   resources :chatrooms do
     resources :messages, only: :create
-  end
-  resources :tours do
-    post 'bookmarks', to: 'bookmarks#create', as: :bookmarks
   end
 end
