@@ -45,7 +45,7 @@ max.save!
 file1 = URI.open("https://images.unsplash.com/photo-1568213816046-0ee1c42bd559?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2luZSUyMHRhc3Rpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60")
 file2 = URI.open("https://images.unsplash.com/photo-1575032748932-70116d68ed58?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80")
 file3 = URI.open("https://images.unsplash.com/photo-1469533802599-76ee5be68f7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80")
-wine_tasting = Tour.new(name: "Wine-tasting", date: "30/06/2023", time: "16:00", description: "Bring your taste-buds to life with sips of vintages!", capacity: 4, duration: "45 minutes", start_point: "120 Av. Lucien Salentiny, 9080 Ettelbruck, Luxembourg")
+wine_tasting = Tour.new(name: "Wine-tasting", date: "30/08/2023", time: "16:00", description: "Bring your taste-buds to life with sips of vintages!", capacity: 4, duration: "45 minutes", start_point: "120 Av. Lucien Salentiny, 9080 Ettelbruck, Luxembourg")
 wine_tasting.photos.attach([io: file1, filename: "Wine1.png", content_type: "image/png"], [io: file2, filename: "Wine2.png", content_type: "image/png"], [io: file3, filename: "Wine3.png", content_type: "image/png"])
 
 wine_tasting.user = maike
@@ -55,7 +55,7 @@ wine_tasting.save!
 file1 = URI.open("https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aGlraW5nfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60")
 file2 = URI.open("https://images.unsplash.com/photo-1642933196736-1138b99bd5da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80")
 file3 = URI.open("https://images.unsplash.com/photo-1440186347098-386b7459ad6b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80")
-hiking = Tour.new(name: "Hiking", date: "28/06/2023", time: "11:00", description: "Come explore and take in breathtaking views, come be one with nature! Come along with your hiking boots, water bottle and hat.", capacity: 4, duration: "120 minutes", start_point: "226, Delftweg, Overschie, Rotterdam")
+hiking = Tour.new(name: "Hiking", date: "28/08/2023", time: "11:00", description: "Come explore and take in breathtaking views, come be one with nature! Come along with your hiking boots, water bottle and hat.", capacity: 4, duration: "120 minutes", start_point: "226, Delftweg, Overschie, Rotterdam")
 hiking.photos.attach([io: file1, filename: "Hiking1.png", content_type: "image/png"], [io: file2, filename: "Hiking2.png", content_type: "image/png"], [io: file3, filename: "Hiking3.png", content_type: "image/png"])
 
 hiking.user = yue
