@@ -16,25 +16,36 @@
   top: 52px;
 }
 
-.form-inline{
+.form-inline {
   display: flex;
 }
 
-.location{
-  border-top-left-radius: 20px ;
-  border-bottom-left-radius: 20px ;
+.location {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
-.search{
-  content: url('https://api.iconify.design/ph/magnifying-glass.svg?color=white');
+.search {
+  content: url("https://api.iconify.design/ph/magnifying-glass.svg?color=white");
   border-top-right-radius: 20px !important;
   border-bottom-right-radius: 20px !important;
   border-top-left-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
 }
 
-.btn-primary{
+.btn-primary {
   justify-content: flex-end;
-  background-color: #EEAC41 !important;
-  border-color:#EEAC41 !important ;
+  background-color: #eeac41 !important;
+  border-color: #eeac41 !important ;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9;
+}
+
+.sticky + .content {
+  padding-top: 76px;
 }
