@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def profile
     @user = current_user
-    @bookmarked_tours = @user.bookmarked_tours
+    @bookmarked_tours = @user.bookmarked_tours.reject{|tour| tour.bookings.find{|i| i.user==current_user}}
     @tour = Tour.new
     authorize current_user
     @booking = Booking.new
