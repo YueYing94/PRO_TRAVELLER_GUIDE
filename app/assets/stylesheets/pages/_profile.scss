@@ -1,10 +1,13 @@
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: "Sora";
   font-weight: 600;
   color: rgb(80, 75, 75);
 }
 
-p, h5 {
+p,
+h5 {
   color: rgb(80, 75, 75);
 }
 
@@ -19,8 +22,8 @@ p, h5 {
 }
 
 .profile-box {
-  width: 250px;
-  height: 250px;
+  width: 280px;
+  height: 300px;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 1);
   display: flex;
@@ -32,8 +35,9 @@ p, h5 {
 }
 
 .badge-box {
-  width: 250px;
-  height: 300px;
+  width: 280px;
+  height: 500px;
+  padding-top: 20px;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 1);
   display: flex;
@@ -45,10 +49,10 @@ p, h5 {
 }
 
 .chat-box {
-  width: 250px;
+  width: 280px;
   border-radius: 10px;
   margin: 10px;
-  background-color:rgba(255, 255, 255, 1);
+  background-color: rgba(255, 255, 255, 1);
   border: 0px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -67,7 +71,7 @@ p, h5 {
   height: 250px;
   border-radius: 5px;
   background-color: #f0f0f0;
-  border: 1px solid #EEAC41 !important;
+  border: 1px solid #eeac41 !important;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center;
   cursor: pointer;
@@ -76,7 +80,7 @@ p, h5 {
 .plus-sign {
   font-size: 40px;
   font-weight: bold;
-  color: #EEAC41;
+  color: #eeac41;
 }
 
 .trip-card {
@@ -135,7 +139,29 @@ p, h5 {
   margin-bottom: 7px;
 }
 
+.badge-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  margin-right: 20px;
+}
 
+.parent-img {
+  position: relative;
+}
+
+.child-img {
+  position: absolute;
+  top: -6px;
+  left: 38px;
+  background-color: rgb(162, 86, 86);
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 50%;
+  color: #a6db93;
+  background-color: #38785f;
+  border: 2px solid #38785f;
+}
 
 .booking-card {
   width: 100%;
@@ -201,4 +227,10 @@ p, h5 {
     font-size: 10px;
     margin: 0;
   }
+}
+
+.review-button {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
 }

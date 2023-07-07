@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :messages
   has_many :chatrooms_as_asker, class_name: "Chatroom", foreign_key: :asker_id
   has_many :chatrooms_as_receiver, class_name: "Chatroom", foreign_key: :receiver_id
+  has_many :reviews_as_giver, class_name: "Review", foreign_key: :giver_id
+  has_many :reviews_as_geter, class_name: "Review", foreign_key: :geter_id
   has_many :bookmarks
   has_many :bookmarked_tours, through: :bookmarks, source: :tour
   def bookmarked?(tour)
