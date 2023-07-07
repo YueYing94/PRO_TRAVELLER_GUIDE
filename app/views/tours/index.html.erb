@@ -71,19 +71,22 @@
                   <p class="my-0 mx-2"><strong>See <%= tour.user.first_name %>'s profile</strong></p>
                 </div>
               <% end %>
-              <% if user_signed_in? %>
+             <% if user_signed_in? %>
                 <% if tour.user.id == current_user.id %>
                   <p>THIS IS YOUR TOUR</p>
                 <% elsif tour.bookings.pluck(:user_id).include?(current_user.id) == true %>
-                  <p>BOOKED!</p>
+                  <%= form_for [tour, tour.bookings.find_by(user_id: current_user.id)], method: :delete do |f| %>
+                    <%= f.button "Cancel Booking", class: "btn btn-primary", type: "submit" %>
+                  <% end %>
                 <% elsif tour.bookings.count < tour.capacity %>
-                  <%= simple_form_for [tour, @booking] do |f| %>
-                    <%= f.submit "Book now!", class:"btn btn-primary child" %>
+                  <%= form_for [tour, @booking] do |f| %>
+                    <%= f.submit "Book now!", class: "btn btn-primary child" %>
                   <% end %>
                 <% else %>
                   <p>This tour is full!</p>
                 <% end %>
               <% end %>
+
             </div>
           </div>
         </div>

@@ -9,4 +9,12 @@ class BookingPolicy < ApplicationPolicy
   def create?
     true
   end
+
+  def accept?
+    true
+  end
+
+  def destroy?
+    true
+  end
 end
