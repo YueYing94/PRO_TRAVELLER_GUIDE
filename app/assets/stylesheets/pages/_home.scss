@@ -7,7 +7,8 @@
   height: 1000px;
   width: 100%;
   opacity: .8;
-  padding: 200px 0;
+  padding: 350px 0;
+  overflow: hidden;
 }
 
 .banner h1 {
@@ -17,14 +18,14 @@
   text-align: center;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   font-size: 50px;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .banner p {
   display:flex;
   justify-content: center;
   font-size: 30px;
-  font-weight:400;
+  font-weight:600;
   line-height: 48px;
   font-style: normal;
   color: #FCFFFE;

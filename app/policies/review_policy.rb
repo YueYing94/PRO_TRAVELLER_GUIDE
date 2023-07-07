@@ -1,4 +1,4 @@
-class BookingPolicy < ApplicationPolicy
+class ReviewPolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     # def resolve
@@ -6,15 +6,11 @@ class BookingPolicy < ApplicationPolicy
     # end
   end
 
+  def new?
+    true
+  end
+
   def create?
-    true
-  end
-
-  def accept?
-    true
-  end
-
-  def destroy?
     true
   end
 end

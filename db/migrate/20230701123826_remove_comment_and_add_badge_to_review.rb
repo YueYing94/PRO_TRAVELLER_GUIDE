@@ -1,0 +1,6 @@
+class RemoveCommentAndAddBadgeToReview < ActiveRecord::Migration[7.0]
+  def change
+    remove_column :reviews, :comment, :text
+    add_column :reviews, :badge, :string
+  end
+end

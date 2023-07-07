@@ -7,7 +7,9 @@ class Tour < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_start_point?
 
   include PgSearch::Model
-  pg_search_scope :search_by_start_point, against: :start_point
+  pg_search_scope :search_by_start_point, against: :start_point, using: {
+    tsearch: { prefix: true }
+    }
   pg_search_scope :search_by_date, against: :date
   {
     tsearch: { prefix: true } # <-- now `superman batm` will return something!
