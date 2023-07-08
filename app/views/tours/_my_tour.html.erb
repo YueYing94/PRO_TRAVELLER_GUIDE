@@ -1,0 +1,31 @@
+        <div class="row row-cols-1 row-cols-md-3 g-4" >
+
+              <% user.tours.each do |tour| %>
+                <%= render 'tours/tour_infos', tour: tour %>
+              <% end %>
+
+
+          <div class="col">
+            <button type="button" class="create-card" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+              <h1 class='plus-sign'>+</h1>
+            </button>
+            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="false">
+              <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create a tour</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class='container'>
+                      <div class="create-edit-form">
+                        <%= render "shared/form", tour: tour %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>

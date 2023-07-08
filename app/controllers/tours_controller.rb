@@ -26,19 +26,33 @@ class ToursController < ApplicationController
     @tour = Tour.new(tour_params)
     @tour.user = current_user
     authorize @tour
-    if @tour.save
-      redirect_to profile_path
-    else
-      @user = current_user
-      render "users/profile", status: :unprocessable_entity
+
+    respond_to do |format|
+      if @tour.save
+        @user = current_user
+        format.html { redirect_to profile_path }
+        format.json
+      else
+        @user = current_user
+        format.html { render "users/profile", status: :unprocessable_entity }
+        format.json
+      end
     end
   end
 
   def update
     @tour = Tour.find(params[:id])
     authorize @tour
-    @tour.update(tour_params)
-    redirect_to profile_path
+    respond_to do |format|
+      if @tour.update(tour_params)
+        format.html { redirect_to profile_path }
+        format.json
+      else
+        @user = current_user
+        format.html { render "users/profile", status: :unprocessable_entity }
+        format.json
+      end
+    end
   end
 
   def destroy
