@@ -27,7 +27,11 @@ class ToursController < ApplicationController
     @tour.user = current_user
     authorize @tour
     @tour.save
-    redirect_to profile_path
+    if @tour.save
+      redirect_to profile_path
+    else
+      redirect_to profile_path, alert: "Tour creation failed"
+    end
   end
 
   def update
