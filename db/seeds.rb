@@ -42,7 +42,7 @@ max.save!
 file1 = URI.open("https://images.unsplash.com/photo-1568213816046-0ee1c42bd559?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2luZSUyMHRhc3Rpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60")
 file2 = URI.open("https://images.unsplash.com/photo-1575032748932-70116d68ed58?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80")
 file3 = URI.open("https://images.unsplash.com/photo-1469533802599-76ee5be68f7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80")
-wine_tasting = Tour.new(name: "Wine-tasting", date: "16/07/2023", time: "16:00", description: "Bring your taste-buds to life with sips of vintages!", capacity: 4, duration: "45 minutes", start_point: "120 Av. Lucien Salentiny, 9080 Ettelbruck, Luxembourg")
+wine_tasting = Tour.new(name: "Wine-tasting", date: "06/07/2023", time: "16:00", description: "Bring your taste-buds to life with sips of vintages!", capacity: 4, duration: "45 minutes", start_point: "120 Av. Lucien Salentiny, 9080 Ettelbruck, Luxembourg")
 wine_tasting.photos.attach([io: file1, filename: "Wine1.png", content_type: "image/png"], [io: file2, filename: "Wine2.png", content_type: "image/png"], [io: file3, filename: "Wine3.png", content_type: "image/png"])
 
 wine_tasting.user = maike
