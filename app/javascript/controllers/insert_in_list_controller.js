@@ -9,8 +9,6 @@ export default class extends Controller {
   }
 
   send(event) {
-    console.log("hi!!!!!!!");
-
     event.preventDefault();
     const url = this.formTarget.action;
     console.log(url);
