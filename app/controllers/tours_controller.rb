@@ -26,11 +26,11 @@ class ToursController < ApplicationController
     @tour = Tour.new(tour_params)
     @tour.user = current_user
     authorize @tour
+    @tour.save
     if @tour.save
       redirect_to profile_path
     else
-      @user = current_user
-      render "users/profile", status: :unprocessable_entity
+      redirect_to profile_path, alert: "Tour creation failed"
     end
   end
 

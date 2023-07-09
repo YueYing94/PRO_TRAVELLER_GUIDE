@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :reviews_as_geter, class_name: "Review", foreign_key: :geter_id
   has_many :bookmarks
   has_many :bookmarked_tours, through: :bookmarks, source: :tour
+  validates :image, presence: true
   def bookmarked?(tour)
     bookmarks.exists?(tour: tour)
   end
