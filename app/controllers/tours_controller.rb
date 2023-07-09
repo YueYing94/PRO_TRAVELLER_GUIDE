@@ -26,7 +26,6 @@ class ToursController < ApplicationController
     @tour = Tour.new(tour_params)
     @tour.user = current_user
     authorize @tour
-
     respond_to do |format|
       if @tour.save
         @user = current_user
