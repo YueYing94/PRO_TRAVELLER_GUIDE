@@ -4,6 +4,8 @@
 @import "tour_index";
 @import "chatbox";
 @import "review";
+@import 'login';
+@import 'signup';
 body {
   background-color: #76ac71 !important;
   font-family: "Sora", sans-serif;
@@ -43,6 +45,31 @@ body {
   border-radius: 4px;
   padding: 0.5em 1.5em;
   background: #EEAC41;
+  transition: 0.2s;
+  font-weight: bold;
+  font-size: 14px;
+
+  &:hover {
+    color: grey(--hover-text);
+    transform: translate(-0.25rem, -0.25rem);
+    background: grey(--hover-bg);
+    box-shadow: 0.15rem 0.15rem grey;
+  }
+
+  &:active {
+    transform: translate(0);
+    box-shadow: none;
+  }
+}
+
+.btn.btn-secondary {
+  --bg: #000;
+  --hover-bg: #ff90e8;
+  --hover-text: #000;
+  color: #fff;
+  border-radius: 4px;
+  padding: 0.5em 1.5em;
+  background: #6d6d6d;
   transition: 0.2s;
   font-weight: bold;
   font-size: 14px;
