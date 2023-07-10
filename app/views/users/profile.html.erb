@@ -1,12 +1,37 @@
 <div class="main-div">
   <div>
     <div class="profile-box">
+
       <%= image_tag(current_user.image, style:'height: 150px; width: 150px; border-radius: 50%;') %><br>
       <h1><%= current_user.first_name %></h1>
+      <% if !current_user.reviews_as_geter.empty? %>
+        <% sum = 0 %>
+        <% @user.reviews_as_geter.each do |review| %>
+          <% sum += review.star%>
+        <% end %>
+        <h4>
+          <% (sum / current_user.reviews_as_geter.count).times do %>
+            <i class="fa-solid fa-star" style="color: #ffc107;"></i>
+          <% end %>
+        </h4>
+      <% end %>
     </div>
 
     <div class="badge-box">
-      <h1>badges</h1>
+      <h1 class='mb-4'>badges</h1>
+      <% array = [] %>
+      <% current_user.reviews_as_geter.each do |review| %>
+        <% array << review.badge %>
+      <% end %>
+      <div>
+        <% array_count = array.flatten %>
+        <div  class="parent-img"><p class="parent-img"><%= image_tag "3.png", class:"badge-img" %>friendly<div class='child-img'><%= array_count.count('friendly')%></div></p></div>
+        <div  class="parent-img"><p class="parent-img"><%= image_tag "1.jpg", class:"badge-img" %>knowledgeable<div class='child-img'><%= array_count.count('knowledgeable') %></div></p></div>
+        <div  class="parent-img"><p class="parent-img"><%= image_tag "6.png", class:"badge-img" %>adventurous<div class='child-img'><%= array_count.count('adventurous') %></div></p></div>
+        <div  class="parent-img"><p class="parent-img"><%= image_tag "2.png", class:"badge-img" %>funny<div class='child-img'><%= array_count.count('funny') %></div></p></div>
+        <div  class="parent-img"><p class="parent-img"><%= image_tag "4.png", class:"badge-img" %>great for kids<div class='child-img'><%= array_count.count('great for kids') %></div></p></div>
+        <div  class="parent-img"><p class="parent-img"><%= image_tag "5.png", class:"badge-img" %>would recommend<div class='child-img'><%= array_count.count('would recommend') %></div></p></div>
+      </div>
     </div>
 
 
@@ -16,13 +41,14 @@
 
 
   <div>
+
+
     <div class="card about-box">
       <div class="card-header"><h1>About Me</h1></div>
       <div class="card-body">
         <p class="card-text"><%= current_user.description %></p>
       </div>
     </div>
-
 
     <% pending_bookings = [] %>
     <% @user.tours.each do |tour| %>
@@ -71,118 +97,10 @@
       </div>
     <% end %>
 
-    <div class="card about-box">
+    <div class="card about-box" >
       <div class="card-header"><h1>Tours I Organised</h1></div>
-      <div class="card-body">
-
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-          <% @user.tours.each do |tour| %>
-
-            <div class="col">
-              <div class="card trip-card">
-
-
-                  <div id="carousel_id<%= tour.id %>" class="carousel slide">
-
-                    <div class="carousel-inner">
-                      <% tour.photos.each_with_index do |photo, index| %>
-                        <div id="carousel_item_<%= index %>" class="card-image carousel-item <%= index == 0 ? 'active' : '' %>">
-
-                          <%= cl_image_tag photo.key, height: 160, width: 300, crop: :fill, class: 'rounded-image'%>
-                        </div>
-
-                      <% end %>
-                    </div>
-
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel_id<%= tour.id %>" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carousel_id<%= tour.id %>" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
-
-                  </div>
-
-
-
-                <div class="card-body my-1 py-0">
-                  <h5 class='my-0'><%= tour.name %></h5>
-                  <p class='my-0'><%= tour.bookings.count %>/<%= tour.capacity %></p>
-
-                  <div class="d-flex">
-
-                    <button type="button" class="edit-button" data-bs-toggle="modal" data-bs-target="#exampleModal2<%= tour.id%>">
-                      <p><i class="fa-solid fa-pen-to-square" style="color: #EEAC41;"></i></p>
-                    </button>
-
-                    <%= link_to tour_path(tour), class: "edit-button", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-                      <i class="fa-solid fa-trash-can" style="color: #EEAC41;"></i>
-                    <% end %>
-
-                    <% if tour.user == current_user && tour.bookings.count > 0 %>
-                      <button type="button" class="btn btn-primary child" data-bs-toggle="modal" data-bs-target="#membersModal<%= tour.id %>">
-                      Members
-                      </button>
-
-
-                        <div class="modal fade" id="membersModal<%= tour.id %>" tabindex="-1" aria-labelledby="membersModalLabel<%= tour.id %>" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="membersModalLabel<%= tour.id %>">Members</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body">
-                                <% tour.bookings.each do |booking| %>
-                                  <p><%= booking.user.first_name %> <%= booking.user.last_name %></p>
-                                <% end %>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                    <% end %>
-
-                  </div>
-
-
-                  <div class="modal fade" id="exampleModal2<%= tour.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="exampleModalLabel">edit a tour</h1>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          <div class='container'>
-                            <div class="create-edit-form">
-                              <%= render "shared/form", tour: tour %>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-                </div>
-
-
-
-              </div>
-            </div>
-
-          <% end %>
-          <div class="col">
-            <button type="button" class="create-card" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-              <h1 class='plus-sign'>+</h1>
-            </button>
-          </div>
-        </div>
-
-
+      <div class="card-body"  data-controller='insert-in-list' data-insert-in-list-target='dom'>
+        <%= render 'tours/my_tour', user: current_user, tour: @tour %>
       </div>
     </div>
 
@@ -190,166 +108,209 @@
       <div class="card-header"><h1>Tours I Joined</h1></div>
       <div class="card-body">
 
-      <div class="row row-cols-1 row-cols-md-3 g-4">
-        <% @user.bookings.each do |booking| %>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <% @user.bookings.each do |booking| %>
 
 
-          <div class="col">
-            <div class="card trip-card parent">
-              <button type="button" class="btn btn-primary child" data-bs-toggle="modal" data-bs-target="#staticBackdrop<%= booking.tour.id %>">
-                See More
-              </button>
+            <div class="col">
+              <div class="card trip-card parent">
+
+                <button type="button" class="btn btn-primary child" data-bs-toggle="modal" data-bs-target="#staticBackdrop<%= booking.tour.id %>">
+                  See More
+                </button>
+
+                <div class="modal fade" id="staticBackdrop<%= booking.tour.id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel"><%= booking.tour.name %></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
 
 
+                        <div class='my-3'>
+                          <div id="carousel_id<%= booking.tour.id %>" class="carousel slide">
 
-              <div class="modal fade" id="staticBackdrop<%= booking.tour.id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="staticBackdropLabel"><%= booking.tour.name %></h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
+                            <div class="carousel-inner">
+                              <% booking.tour.photos.each_with_index do |photo, index| %>
+                                <div id="carousel_item_<%= index %>" class="card-image carousel-item <%= index == 0 ? 'active' : '' %>">
 
+                                  <%= cl_image_tag photo.key, height: 160, width: 300, crop: :fill, class: 'rounded-image'%>
+                                </div>
 
-                      <div class='my-3'>
-                        <div id="carousel_id<%= booking.tour.id %>" class="carousel slide">
+                              <% end %>
+                            </div>
 
-                          <div class="carousel-inner">
-                            <% booking.tour.photos.each_with_index do |photo, index| %>
-                              <div id="carousel_item_<%= index %>" class="card-image carousel-item <%= index == 0 ? 'active' : '' %>">
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel_id<%= booking.tour.id %>" data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel_id<%= booking.tour.id %>" data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                            </button>
 
-                                <%= cl_image_tag photo.key, height: 160, width: 300, crop: :fill, class: 'rounded-image'%>
-                              </div>
-
-                            <% end %>
                           </div>
-
-                          <button class="carousel-control-prev" type="button" data-bs-target="#carousel_id<%= booking.tour.id %>" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                          </button>
-                          <button class="carousel-control-next" type="button" data-bs-target="#carousel_id<%= booking.tour.id %>" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                          </button>
-
                         </div>
+
+
+                        <p><strong>Date:</strong><%= booking.tour.date %></p><br>
+                        <p><strong>Time:</strong><%= booking.tour.time.strftime("%H:%M") %></p><br>
+                        <p><strong>Start point:</strong><%= booking.tour.start_point %> </p><br>
+                        <p><strong>Capacity:</strong> <%= booking.tour.bookings.count %>/<%= booking.tour.capacity %></p><br>
+                        <p><strong>Description:</strong><%= booking.tour.description %></p><br>
                       </div>
+                      <div class="modal-footer d-flex justify-content-between">
+
+                        <%= link_to user_path(booking.tour.user), target: "_blank", class: "edit-button text-warning" do %>
+                          <div class="d-flex align-items-center">
+                            <%= cl_image_tag booking.tour.user.image.key, style: 'height: 50px; width: 50px;', class: "avatar" %>
+                            <p class="my-0 mx-2"><strong>See <%= booking.tour.user.first_name %>'s profile</strong></p>
+                            <br>
+                          </div>
+                        <% end %>
 
 
-                      <p><strong>Date:</strong><%= booking.tour.date %></p><br>
-                      <p><strong>Time:</strong><%= booking.tour.time.strftime("%H:%M") %></p><br>
-                      <p><strong>Start point:</strong><%= booking.tour.start_point %> </p><br>
-                      <p><strong>Capacity:</strong> <%= booking.tour.bookings.count %>/<%= booking.tour.capacity %></p><br>
-                      <p><strong>Description:</strong><%= booking.tour.description %></p><br>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-between">
-
-                      <%= link_to user_path(booking.tour.user), target: "_blank", class: "edit-button text-warning" do %>
-                      <div class="d-flex align-items-center">
-                        <%= cl_image_tag booking.tour.user.image.key, style: 'height: 50px; width: 50px;', class: "avatar" %>
-                        <p class="my-0 mx-2"><strong>See <%= booking.tour.user.first_name %>'s profile</strong></p>
-                        <br>
-                      </div>
-                     <% end %>
-
-
-                      <% if booking.tour.user.id == current_user.id %>
-                        <p>THIS IS YOUR TOUR</p>
-
-                      <% elsif booking.user.id == current_user.id  %>
+                        <% if Date.today <= booking.tour.date %>
                           <%= form_for [booking.tour, booking], method: :delete do |f| %>
                           <%= f.button "Cancel Booking", class: "btn btn-primary", type: "submit" %>
                           <% end %>
-                      <% elsif @bookings.pluck(:user_id).include?(current_user.id) == true  %>
-                          <p>Booked!</p>
-                      <% else %>
-                        <%= simple_form_for [booking.tour, @booking] do |f| %>
-                        <%= f.submit "Book now!", class:"btn btn-primary child" %>
                         <% end %>
-                      <% end %>
-
-
+                      </div>
                     </div>
                   </div>
                 </div>
+
+
+
+                <%= cl_image_tag booking.tour.photos[0].key, height: 150, width: 300, crop: :fill, class: 'card-img-top'%>
+
+
+                <% if current_user.id == booking.user.id %>
+                  <div class="card-body my-1 py-0">
+                    <h5 class='my-0'><%= booking.tour.name %></h5>
+                    <p class='my-0'><%= booking.tour.bookings.count %>/<%= booking.tour.capacity %></p>
+
+                    <% if Date.today > booking.tour.date %>
+                      <div class="review-button">
+                        <% if booking.review %>
+                          <p class='status-text mb-1'>reviewed!</p>
+                        <% else %>
+                          <%= link_to 'Review', new_user_review_path(booking.tour.user, name: booking.id), class: 'btn btn-primary' %>
+                        <% end %>
+                      </div>
+                    <% elsif booking.status == "pending..." %>
+                      <div class="status-wrapper">
+                        <div class="status-circle pending"></div>
+                        <p class="status-text">Booking: Pending...</p>
+                      </div>
+                    <% elsif booking.status == "Accepted!" %>
+                      <div class="status-wrapper">
+                        <div class="status-circle confirmed"></div>
+                        <p class="status-text">Booking: Confirmed!</p>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+
+
               </div>
-
-
-
-              <%= cl_image_tag booking.tour.photos[0].key, height: 150, width: 300, crop: :fill, class: 'card-img-top'%>
-
-
-              <% if current_user.id == booking.user.id %>
-                <div class="card-body my-1 py-0">
-                  <h5 class='my-0'><%= booking.tour.name %></h5>
-                  <p class='my-0'><%= booking.tour.bookings.count %>/<%= booking.tour.capacity %></p>
-
-
-                  <% if booking.status == "pending..." %>
-                    <div class="status-wrapper">
-                      <div class="status-circle pending"></div>
-                      <p class="status-text">Booking: Pending...</p>
-                    </div>
-                  <% elsif booking.status == "Accepted!" %>
-                    <div class="status-wrapper">
-                      <div class="status-circle confirmed"></div>
-                      <p class="status-text">Booking: Confirmed!</p>
-                    </div>
-                  <% elsif booking.status == "Completed!" %>
-                    <div class="status-wrapper">
-                      <div class="status-circle completed"></div>
-                      <p class="status-text">Booking: Completed!</p>
-                    </div>
-                  <% end %>
-                </div>
-              <% end %>
-
-
             </div>
-          </div>
 
-        <% end %>
-      </div>
-      </div>
-    </div>
-
-
-
-<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Create a tour</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class='container'>
-          <div class="create-edit-form">
-            <%= render "shared/form", tour: @tour %>
-          </div>
+          <% end %>
         </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="card about-box">
-  <div class="card-header">
-    <h1>Tour I Saved</h1>
-  </div>
-  <div class="card-body">
-    <% if @bookmarked_tours.present? %>
-      <ul class= "list">
-        <% @bookmarked_tours.each do |tour| %>
-          <li>
-           <%= link_to tour.name, tours_path(tour), style: 'color: #000000; font-weight: bold; text-decoration: none;' %>
-            - <%= cl_image_tag tour.user.image.key, style: 'height: 40px; width: 40px;', class: 'avatar' %>
-          </li>
+
+    <div class="card about-box">
+      <div class="card-header">
+        <h1>Tour I Saved</h1>
+      </div>
+      <div class="card-body">
+        <% if @bookmarked_tours.present? %>
+          <ul class= "list">
+            <% @bookmarked_tours.each do |tour| %>
+              <li>
+                <button type="button" class="btn button" data-bs-toggle="modal" data-bs-target="#staticBackdrop<%= tour.id %>">
+                    <%= tour.name %> <i class="fa-solid fa-arrow-right fa-sm"></i> <%= cl_image_tag tour.user.image.key, style: 'height: 40px; width: 40px;', class: 'avatar' %>
+                  <span class="button-hover-text" data-text="Hover Text"></span>
+                </button>
+                <div class="modal fade" id="staticBackdrop<%= tour.id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel"><%= tour.name %></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+
+
+                        <div class='my-3'>
+                          <div id="carousel_id<%= tour.id %>" class="carousel slide">
+
+                            <div class="carousel-inner">
+                              <% tour.photos.each_with_index do |photo, index| %>
+                                <div id="carousel_item_<%= index %>" class="card-image carousel-item <%= index == 0 ? 'active' : '' %>">
+
+                                  <%= cl_image_tag photo.key, height: 160, width: 300, crop: :fill, class: 'rounded-image'%>
+                                </div>
+
+                              <% end %>
+                            </div>
+
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel_id<%= tour.id %>" data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel_id<%= tour.id %>" data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                            </button>
+
+                          </div>
+                        </div>
+
+
+                        <p><strong>Date:</strong><%= tour.date %></p><br>
+                        <p><strong>Time:</strong><%= tour.time.strftime("%H:%M") %></p><br>
+                        <p><strong>Start point:</strong><%= tour.start_point %></p><br>
+                        <p><strong>Capacity:</strong><%= tour.capacity %></p><br>
+                        <p><strong>Description:</strong><%= tour.description %></p><br>
+                      </div>
+                      <div class="modal-footer d-flex justify-content-between">
+
+                        <%= link_to user_path(tour.user), target: "_blank", class: "edit-button text-warning" do %>
+                          <div class="d-flex align-items-center">
+                            <%= cl_image_tag tour.user.image.key, style: 'height: 50px; width: 50px;', class: "avatar" %>
+                            <p class="my-0 mx-2"><strong>See <%= tour.user.first_name %>'s profile</strong></p>
+                            <br>
+                          </div>
+                        <% end %>
+
+
+                        <% if tour.user.id == current_user.id %>
+                          <p>THIS IS YOUR TOUR</p>
+                        <% elsif tour.user.id == current_user.id  %>
+                          <p>BOOKED!</p>
+                        <% else %>
+                          <%= simple_form_for [tour, @booking] do |f| %>
+                          <%= f.submit "Book now!", class:"btn btn-primary child" %>
+                          <% end %>
+                        <% end %>
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>No bookmarked tours.</p>
         <% end %>
-      </ul>
-    <% else %>
-      <p>No bookmarked tours.</p>
-    <% end %>
+      </div>
+    </div>
   </div>
 </div>

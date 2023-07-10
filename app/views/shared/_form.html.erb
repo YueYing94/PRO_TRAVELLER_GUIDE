@@ -1,11 +1,11 @@
-            <%= simple_form_for tour do |f| %>
-              <%= f.input :name %>
-              <%= f.input :description %>
-              <%= f.input :start_point %>
-              <%= f.input :duration %>
-              <%= f.input :capacity %>
-              <%= f.input :date %>
-              <%= f.input :time %>
-              <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-              <%= f.submit "Update", class: "btn btn-success" %>
-            <% end %>
+<%= simple_form_for tour, html: {data: {insert_in_list_target: tour.id ? '': 'form', edit_tour_target: "form", action: tour.id ? "submit->edit-tour#update" : "submit->insert-in-list#send"}} do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :start_point %>
+  <%= f.input :duration %>
+  <%= f.input :capacity %>
+  <%= f.input :date %>
+  <%= f.input :time %>
+  <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+<% end %>

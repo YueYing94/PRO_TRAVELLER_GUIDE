@@ -7,7 +7,6 @@ export default class extends Controller {
   static values = { id: Number };
 
   connect() {
-    console.log(this.lastTarget);
     this.channel = createConsumer().subscriptions.create(
       { channel: "ChatroomChannel", id: this.idValue },
       { received: (data) => this.#insertMessageAndScrollDown(data) }

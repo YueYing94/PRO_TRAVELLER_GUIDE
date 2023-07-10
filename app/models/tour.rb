@@ -9,10 +9,9 @@ class Tour < ApplicationRecord
   include PgSearch::Model
   pg_search_scope :search_by_start_point, against: :start_point, using: {
     tsearch: { prefix: true }
-    }
+  }
   pg_search_scope :search_by_date, against: :date
   {
     tsearch: { prefix: true } # <-- now `superman batm` will return something!
   }
-
 end

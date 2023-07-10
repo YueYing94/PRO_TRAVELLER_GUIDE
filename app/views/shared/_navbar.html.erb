@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon sticky">
   <div class="container">
     <%= link_to root_path, class: "navbar-brand" do %>
       <%= image_tag "travellers-guide-high-resolution-logo-color-on-transparent-background.png" %>
@@ -11,8 +11,8 @@
       <div>
         <%= form_with url: tours_path, method: :get, class: "form-inline" do %>
             <%= text_field_tag :location_query,  params[:location_query], placeholder: "Search by location", class: "form-control location mr-sm-2" %>
-            <%= date_field_tag :start_date,  params[:start_date_query], placeholder: "Date", class: "form-control mr-sm-2", value:params[:start_date] %>
-            <%= date_field_tag :end_date,  params[:end_date_query], placeholder: "Date", class: "form-control mr-sm-2", value:params[:end_date] %>
+            <%= date_field_tag :start_date,  params[:start_date_query], placeholder: "Date from:", class: "form-control mr-sm-2", value:params[:start_date] %>
+            <%= date_field_tag :end_date,  params[:end_date_query], placeholder: "Date to:", class: "form-control mr-sm-2", value:params[:end_date] %>
             <%= submit_tag "Search", class: "btn btn-primary search my-2 my-sm-0" %><iconify-icon icon="ph:magnifying-glass" width="20" height="20" style="color: white;"></iconify-icon><script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
         <% end %>
       </div>
