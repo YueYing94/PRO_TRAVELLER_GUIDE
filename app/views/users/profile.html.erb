@@ -1,3 +1,6 @@
+<% content_for :meta_title, "#{@current_user.first_name}'s profile" %>
+<% content_for :meta_description, @current_user.description %>
+<% content_for :meta_image, cl_image_path(@current_user.image.key) if @current_user.image.attached? %>
 <div class="main-div">
   <div>
     <div class="profile-box">
@@ -238,7 +241,7 @@
 
     <div class="card about-box">
       <div class="card-header">
-        <h1>Tour I Saved</h1>
+        <h1>Tours I Saved</h1>
       </div>
       <div class="card-body">
         <% if @bookmarked_tours.present? %>
