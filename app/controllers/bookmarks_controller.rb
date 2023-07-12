@@ -6,13 +6,14 @@ class BookmarksController < ApplicationController
     @bookmark.user = current_user
     authorize @bookmark
     @bookmark.save
-    redirect_to profile_path(current_user)
+    redirect_to tours_path
   end
 
   def destroy
     @bookmark = Bookmark.find(params[:id])
+    authorize @bookmark
     @bookmark.destroy
-    redirect_to profile_path, notice: 'Tour unbookmarked successfully.'
+    # redirect_to tours_path, status: :see_other
+    redirect_back(fallback_location: root_path)
   end
-
 end
