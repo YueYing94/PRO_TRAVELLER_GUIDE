@@ -18,7 +18,7 @@ h5 {
 }
 
 .card-header {
- padding-bottom: 2px;
+  padding-bottom: 2px;
 }
 
 .profile-box {
@@ -139,7 +139,6 @@ h5 {
   margin-bottom: 7px;
 }
 
-
 .button {
   display: inline-block;
   font-weight: 600;
@@ -157,7 +156,7 @@ h5 {
   letter-spacing: 2px;
   background-color: transparent;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-  border: 1px solid #EEAC41
+  border: 1px solid #eeac41;
 }
 
 .button::before {
@@ -169,13 +168,13 @@ h5 {
   left: 0;
   background-color: #fff;
   transform: translateX(-101%);
-  transition: all .5s ease;
+  transition: all 0.5s ease;
   z-index: -1;
 }
 
 .button:hover {
   color: orange;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 
 .button:hover::before {
@@ -226,7 +225,8 @@ h5 {
       width: 60%;
       padding: 10px;
 
-      p, h5 {
+      p,
+      h5 {
         margin: 0;
       }
 
@@ -260,8 +260,6 @@ h5 {
     }
   }
 }
-
-
 
 .status-wrapper {
   display: flex;
@@ -298,4 +296,8 @@ h5 {
   position: absolute;
   bottom: 8px;
   left: 8px;
+}
+
+.height {
+  height: 679px;
 }

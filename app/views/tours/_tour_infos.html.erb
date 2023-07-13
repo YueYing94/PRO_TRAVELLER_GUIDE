@@ -59,7 +59,9 @@
                   </div>
                   <div class="modal-body">
                     <% tour.bookings.each do |booking| %>
-                      <p><%= booking.user.first_name %> <%= booking.user.last_name %></p>
+                      <%= link_to user_path(booking.user), style: "text-decoration: none;" do%>
+                        <p><%= booking.user.first_name %> <%= booking.user.last_name %> <%= image_tag(booking.user.image, style:'height: 50px; width: 50px; border-radius: 50%;') %><br></p>
+                      <% end %>
                     <% end %>
                   </div>
                 </div>

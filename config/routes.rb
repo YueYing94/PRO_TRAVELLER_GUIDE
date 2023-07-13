@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     end
     post 'bookmarks', to: 'bookmarks#create', as: :bookmarks
   end
+  resources :bookmarks, only: [:destroy]
   root to: "pages#home"
   get '/explorers/:id', to: "users#show", as: :user
   resources :chatrooms do
