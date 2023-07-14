@@ -16,9 +16,10 @@ export default class extends Controller {
       style: "mapbox://styles/mapbox/streets-v10"
     });
 
-    this.map.on('load', function () {
+    this.element.addEventListener('shown.bs.modal', (e) => {
+      console.log("Hi");
       this.map.resize();
-    });
+    })
 
     this.#addMarkersToMap();
     this.#fitMapToMarkers();
@@ -38,12 +39,12 @@ export default class extends Controller {
 
   #fitMapToMarkers() {
     const bounds = new mapboxgl.LngLatBounds()
-    this.markersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]))
+    bounds.extend([ this.markersValue.lng, this.markersValue.lat ])
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 })
   }
 
-  resizeMap(event) {
+  /*resizeMap(event) {
     console.log("Hi");
     this.map.resize();
-  }
+  }*/
 }
